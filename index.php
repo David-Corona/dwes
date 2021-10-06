@@ -1,2 +1,2 @@
 <?php
-phpinfo();
+    require 'views/index.view.php';
