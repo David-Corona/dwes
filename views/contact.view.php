@@ -93,19 +93,48 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12 contact">
-				  <form method="post" action="contact-post.html">
-					<div class="to">
-                     	<input type="text" class="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
-					 	<input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-					 	<input type="text" class="text" value="Subject" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject';}">
-					</div>
-					<div class="text">
-	                   <textarea value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
-	                   <div class="form-submit">
-			           <input name="submit" type="submit" id="submit" value="Submit"><br>
-			           </div>
-	                </div>
-	                <div class="clear"></div>
+                    <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') : ?>
+                        <div class="alert alert-<?= empty($errores) ? 'success' : 'danger'; ?> alert-dismissible" role="alert">
+                            <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>-->
+                            <?php if(empty($errores)) : ?>
+                                <p><?= $GLOBALS['mensajeOk'] ?></p>
+                                <ul>
+                                    <li>Nombre: <?= $GLOBALS['nombre'] ?></li>
+                                    <li>Apellidos: <?= $GLOBALS['apellido'] ?></li>
+                                    <li>Email: <?= $GLOBALS['email'] ?></li>
+                                    <li>Asunto: <?= $GLOBALS['asunto'] ?></li>
+                                    <li>Mensaje: <?= $GLOBALS['mensaje'] ?></li>
+                                </ul>
+                            <?php else : ?>
+                                <ul>
+                                    <?php foreach($errores as $error) : ?>
+                                        <li><?= $error ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                    <form method="post" action="<?= $_SERVER['PHP_SELF'] ?>" >
+                        <div class="left-contact">
+                            <p><label for="nombre">(*) Nombre</label>
+                           <input type="text" class="text" name="nombre" value="<?= $GLOBALS['nombre'] ?>" required></p>
+                            <p><label for="nombre">Apellidos</label>
+                           <input type="text" class="text" name="apellido" value="<?= $GLOBALS['apellido'] ?>" ></p>
+                            <p><label for="nombre">(*) Email</label>
+                           <input type="text" class="text" name="email" value="<?= $GLOBALS['email'] ?>" required></p>
+                       </div>
+                       <div class="right-contact">
+                           <p><label for="nombre">(*) Asunto</label>
+                           <input type="text" class="text" name="asunto" value="<?= $GLOBALS['asunto'] ?>" required></p>
+                           <p><label for="nombre">Mensaje</label>
+                           <textarea name="mensaje" ><?= $GLOBALS['mensaje'] ?></textarea></p>
+                           <div class="form-submit">
+                              <input name="submit" type="submit" id="submit" value="Submit"><br>
+                           </div>
+                       </div>
+                       <div class="clear">Los campos marcados con (*) son obligatorios.</div>
                    </form>
 			     </div>
 		    </div>
