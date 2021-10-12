@@ -1,5 +1,4 @@
-<?php include __DIR__ . '/partials/inicio1-doc.part.php'; ?>
-<?php include __DIR__ . '/partials/inicio2-doc.part.php'; ?>
+<?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
 
      <!-- Add fancyBox main JS and CSS files -->
 	<script src="../js/jquery.magnific-popup.js" type="text/javascript"></script>

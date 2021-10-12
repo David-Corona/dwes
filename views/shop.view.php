@@ -1,5 +1,4 @@
-<?php include __DIR__ . '/partials/inicio1-doc.part.php'; ?>
-<?php include __DIR__ . '/partials/inicio2-doc.part.php'; ?>
+<?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
 
 </head>
 <body>
@@ -8,19 +7,19 @@
      <div class="main">
       <div class="shop_top">
 		<div class="container">
-			<div class="row shop_box-top">
+			<div class="row"> <!--Antes era: "row shop_box-top"-->
 				<div class="col-md-3 shop_box"><a href="single.php">
-					<img src="../images/pic5.jpg" class="img-responsive" alt=""/>
-					<span class="new-box">
+					<img src="../images/shop/pic5.jpg" class="img-responsive" alt=""/>
+					<!--<span class="new-box">
 						<span class="new-label">New</span>
 					</span>
 					<span class="sale-box">
 						<span class="sale-label">Sale!</span>
-					</span>
+					</span>-->
 					<div class="shop_desc">
 						<h3><a href="#">aliquam volutp</a></h3>
 						<p>Lorem ipsum consectetuer adipiscing </p>
-						<span class="reducedfrom">$66.00</span>
+						<!--<span class="reducedfrom">$66.00</span>-->
 						<span class="actual">$12.00</span><br>
 						<ul class="buttons">
 							<li class="cart"><a href="#">Add To Cart</a></li>

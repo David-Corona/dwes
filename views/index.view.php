@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/partials/inicio1-doc.part.php'; ?>
+<?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
 
 <!--<script src="js/jquery.easydropdown.js"></script>-->
 <!--start slider -->
@@ -6,8 +6,6 @@
 <script src="../js/jquery-ui.min.js"></script>
 <script src="../js/fwslider.js"></script>
 <!--end slider -->
-
-<?php include __DIR__ . '/partials/inicio2-doc.part.php'; ?>
 
 </head>
 <body>

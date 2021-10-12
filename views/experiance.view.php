@@ -1,5 +1,4 @@
-<?php include __DIR__ . '/partials/inicio1-doc.part.php'; ?>
-<?php include __DIR__ . '/partials/inicio2-doc.part.php'; ?>
+<?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
 
     <!-- light-box -->
 	<script type="text/javascript" src="../js/jquery.fancybox.js"></script>
