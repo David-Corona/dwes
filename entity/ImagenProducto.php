@@ -3,10 +3,7 @@
 class ImagenProducto
 {
     const RUTA_IMAGENES = 'images/shop/';
-    /**
-     * @var string
-     */
-    private $nombreImagen;
+
     /**
      * @var string
      */
@@ -19,20 +16,23 @@ class ImagenProducto
      * @var float
      */
     private $precio;
+    /**
+     * @var string
+     */
+    private $nombreImagen;
 
 
     /**
-     * @param string $nombreImagen
-     * @param string $titulo
      * @param string $subtitulo
      * @param float $precio
+     * @param string $titulo
      */
-    public function __construct(string $nombreImagen, string $titulo, string $subtitulo, float $precio)
+    public function __construct(string $titulo, string $subtitulo, float $precio, string $nombreImagen='default.png')
     {
-        $this->nombreImagen = $nombreImagen;
         $this->titulo = $titulo;
         $this->subtitulo = $subtitulo;
         $this->precio = $precio;
+        $this->nombreImagen = $nombreImagen;
     }
 
     /**
@@ -43,24 +43,6 @@ class ImagenProducto
         return $this->getTitulo();
     }
 
-
-    /**
-     * @return string
-     */
-    public function getNombreImagen(): string
-    {
-        return $this->nombreImagen;
-    }
-
-    /**
-     * @param string $nombreImagen
-     * @return ImagenProducto
-     */
-    public function setNombreImagen(string $nombreImagen): ImagenProducto
-    {
-        $this->nombreImagen = $nombreImagen;
-        return $this;
-    }
 
     /**
      * @return string
@@ -115,6 +97,25 @@ class ImagenProducto
         $this->precio = $precio;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getNombreImagen(): string
+    {
+        return $this->nombreImagen;
+    }
+
+    /**
+     * @param string $nombreImagen
+     * @return ImagenProducto
+     */
+    public function setNombreImagen(string $nombreImagen): ImagenProducto
+    {
+        $this->nombreImagen = $nombreImagen;
+        return $this;
+    }
+
 
     public function getUrlImagen() : string
     {

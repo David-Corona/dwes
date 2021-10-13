@@ -7,19 +7,24 @@
      <div class="main">
       <div class="shop_top">
 		<div class="container">
-			<div class="row"> <!--Antes era: "row shop_box-top"-->
+
+
+        <?php include __DIR__ . '/partials/images-shop.part.php'; ?>
+
+            <!--Antes era: "row shop_box-top", incluido margin 5% al .row-->
+			<!--<div class="row">
 				<div class="col-md-3 shop_box"><a href="single.php">
 					<img src="../images/shop/pic5.jpg" class="img-responsive" alt=""/>
-					<!--<span class="new-box">
+					<span class="new-box">
 						<span class="new-label">New</span>
 					</span>
 					<span class="sale-box">
 						<span class="sale-label">Sale!</span>
-					</span>-->
+					</span>
 					<div class="shop_desc">
 						<h3><a href="#">aliquam volutp</a></h3>
 						<p>Lorem ipsum consectetuer adipiscing </p>
-						<!--<span class="reducedfrom">$66.00</span>-->
+						<span class="reducedfrom">$66.00</span>
 						<span class="actual">$12.00</span><br>
 						<ul class="buttons">
 							<li class="cart"><a href="#">Add To Cart</a></li>
@@ -155,7 +160,7 @@
 					    </ul>
 				    </div>
 				</a></div>
-			</div>
+			</div>-->
 		 </div>
 	   </div>
 	  </div>
