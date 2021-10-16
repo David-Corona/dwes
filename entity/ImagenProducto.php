@@ -2,7 +2,8 @@
 
 class ImagenProducto
 {
-    const RUTA_IMAGENES = 'images/shop/';
+    const RUTA_IMAGENES_SHOP = 'images/shop/';
+    const RUTA_IMAGENES_PRODUCTO = 'images/producto/';
 
     /**
      * @var string
@@ -119,7 +120,7 @@ class ImagenProducto
 
     public function getUrlImagen() : string
     {
-        return self::RUTA_IMAGENES . $this->getNombreImagen();
+        return self::RUTA_IMAGENES_SHOP . $this->getNombreImagen();
     }
 
 }
