@@ -25,8 +25,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tiposAceptados = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
         $imagen = new File('imagen', $tiposAceptados); //imagen es el name del input file
 
-        $imagen->saveUploadFile(ImagenProducto::RUTA_IMAGENES_SHOP);
-        $imagen->copyFile(ImagenProducto::RUTA_IMAGENES_SHOP, ImagenProducto::RUTA_IMAGENES_PRODUCTO);
+        $imagen->saveUploadFile(ImagenProducto::RUTA_IMAGENES_PRODUCTO);
+        //$imagen->copyFile(ImagenProducto::RUTA_IMAGENES_SHOP, ImagenProducto::RUTA_IMAGENES_PRODUCTO);
+        $imagen->resizeFile(ImagenProducto::RUTA_IMAGENES_PRODUCTO, ImagenProducto::RUTA_IMAGENES_SHOP);
 
         /*if (empty($titulo)) {
             $errores[] = "El título no se puede quedar vacío.";

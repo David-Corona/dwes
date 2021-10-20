@@ -91,6 +91,27 @@ class File
         $origen = $rutaOrigen . $this->fileName;
         $destino = $rutaDestino . $this->fileName;
 
+        if (is_file($origen) === false)
+        {
+            throw new FileException("No existe el fichero $origen que estás intentando copiar");
+        }
+
+        if (is_file($destino) === true)
+        {
+            throw new FileException("El fichero $destino ya existe y no se puede sobrescribir");
+        }
+
+        if (copy($origen, $destino) === false)
+        {
+            throw new FileException("No se ha podido copiar el fichero $origen a $destino");
+        }
+    }
+
+    public function resizeFile(string $rutaOrigen, string $rutaDestino)
+    {
+        $origen = $rutaOrigen . $this->fileName;
+        $destino = $rutaDestino . $this->fileName;
+
         //si no existe un fichero de origen, obviamente no se puede copiar
         if (is_file($origen) === false)
         {
@@ -99,13 +120,43 @@ class File
 
         if (is_file($destino) === true)
         {
-            throw new FileException("No fichero $destino ya existe y no se puede sobrescribir");
+            throw new FileException("El fichero $destino ya existe y no se puede sobrescribir");
         }
 
-        if (copy($origen, $destino) === false)
-        {
-            throw new FileException("No se ha podido copiar el fichero $origen a $destino");
+
+        if (mime_content_type($origen) == 'image/png'){
+            $img_original = imagecreatefrompng($origen);
+        } elseif (mime_content_type($origen) == 'image/gif'){
+            $img_original = imagecreatefromgif($origen);
+        } elseif (mime_content_type($origen) == 'image/jpeg'){
+            $img_original = imagecreatefromjpeg($origen);
+        } else {
+            throw new FileException("El formato del fichero no está soportado.");
         }
+
+        //$img_original = imagecreatefrompng($origen);
+        $ancho_original = imagesx($img_original);
+        $alto_original = imagesy($img_original);
+
+        if ($ancho_original >= $alto_original){
+            $ancho_destino = 100;
+            $alto_destino = (100 * $alto_original) / $ancho_original;
+        } else {
+            $ancho_destino = (100 * $ancho_original) / $alto_original;
+            $alto_destino = 100;
+        }
+
+        $img_destino = imagecreatetruecolor($ancho_destino, $alto_destino);
+
+        imagecopyresampled(
+            $img_destino, $img_original, 0, 0, 0, 0,
+            $ancho_destino, $alto_destino,
+            $ancho_original, $alto_original);
+
+        //header("Content-type: image/png");
+        imagepng($img_destino, $destino);
+        imagedestroy($img_original);
+        imagedestroy($img_destino);
     }
 
 }
