@@ -37,10 +37,10 @@
                                 <p><?= $GLOBALS['mensajeOk'] ?></p>
                                 <ul>
                                     <li>Nombre: <?= $GLOBALS['nombre'] ?></li>
-                                    <li>Apellidos: <?= $GLOBALS['apellido'] ?></li>
+                                    <li>Apellidos: <?= $GLOBALS['apellidos'] ?></li>
                                     <li>Email: <?= $GLOBALS['email'] ?></li>
                                     <li>Asunto: <?= $GLOBALS['asunto'] ?></li>
-                                    <li>Mensaje: <?= $GLOBALS['mensaje'] ?></li>
+                                    <li>Mensaje: <?= $GLOBALS['texto'] ?></li>
                                 </ul>
                             <?php else : ?>
                                 <ul>
@@ -56,7 +56,7 @@
                             <p><label for="nombre">(*) Nombre</label>
                            <input type="text" class="text" name="nombre" value="<?= $GLOBALS['nombre'] ?>" required></p>
                             <p><label for="nombre">Apellidos</label>
-                           <input type="text" class="text" name="apellido" value="<?= $GLOBALS['apellido'] ?>" ></p>
+                           <input type="text" class="text" name="apellidos" value="<?= $GLOBALS['apellidos'] ?>" ></p>
                             <p><label for="nombre">(*) Email</label>
                            <input type="text" class="text" name="email" value="<?= $GLOBALS['email'] ?>" required></p>
                        </div>
@@ -64,7 +64,7 @@
                            <p><label for="nombre">(*) Asunto</label>
                            <input type="text" class="text" name="asunto" value="<?= $GLOBALS['asunto'] ?>" required></p>
                            <p><label for="nombre">Mensaje</label>
-                           <textarea name="mensaje" ><?= $GLOBALS['mensaje'] ?></textarea></p>
+                           <textarea name="texto" ><?= $GLOBALS['texto'] ?></textarea></p>
                            <div class="form-submit">
                               <input name="submit" type="submit" id="submit" value="Submit"><br>
                            </div>

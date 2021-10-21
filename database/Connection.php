@@ -1,27 +1,26 @@
 <?php
-
+require_once  __DIR__ . '/../core/App.php';
 class Connection
 {
+    /**
+     * @return PDO|void
+     * @throws AppException
+     */
     public static function make()
     {
         try
         {
-            $opciones = [
-                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",    //para que utilice utf8
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,    //cuando se produzca un error, se genere una excepcion
-                PDO::ATTR_PERSISTENT => true     //indicar que la conexión sea persistente = no cierre conex al finalizar script, +rendimiento
-            ];
-
+            $config = App::get('config')['database'];
             $connection = new PDO(
-                'mysql:host=david-corona.local;dbname=david-corona;charset=utf8',
-                'userCurso',
-                'dwes',
-                $opciones
+                $config['connection'] . ';dbname=' . $config['name'],
+                $config['username'],
+                $config['password'],
+                $config['options']
             );
         }
         catch (PDOException $PDOException)
         {
-            die($PDOException->getMessage());
+            throw new AppException('No se ha podido crear la conexión a la base de datos');
         }
         return $connection;
     }

@@ -5,10 +5,10 @@ $mensajeOk = '';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = trim(htmlspecialchars($_POST['nombre']));
-    $apellido = trim(htmlspecialchars($_POST['apellido']));
+    $apellidos = trim(htmlspecialchars($_POST['apellidos']));
     $email = trim(htmlspecialchars($_POST['email']));
     $asunto = trim(htmlspecialchars($_POST['asunto']));
-    $mensaje = trim(htmlspecialchars($_POST['mensaje']));
+    $texto = trim(htmlspecialchars($_POST['texto']));
 
     if (empty($nombre)) {
         $errores[] = "El nombre no se puede quedar vació";
@@ -27,7 +27,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errores)) {
-        $mensajeOk = "Los datos del formulario son correctos:";
+
+        require_once 'database/Connection.php';
+
+        $config = require_once 'app/config.php';
+        $connection = Connection::make($config['database']);
+
+        $sql = "INSERT INTO mensajes (nombre, apellidos, asunto, email, texto, fecha) VALUES ('$nombre', '$apellidos', '$email', '$asunto', '$texto', now())";
+        if ($connection->exec($sql) === false)
+        {
+            $errores[] = 'No se ha podido guardar el mensaje en la base de datos.';
+        } else
+        {
+            $mensajeOk = "Gracias por contactar con nosotros.";
+        }
+
     }
 
 }

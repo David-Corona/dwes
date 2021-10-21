@@ -1,9 +1,14 @@
 <?php
 require_once 'utils/utils.php';
 require_once 'exceptions/FileException.php';
+require_once 'exceptions/QueryException.php';
+require_once 'exceptions/AppException.php';
 require_once 'utils/File.php';
 require_once 'entity/ImagenProducto.php';
+require_once 'repository/ProductoRepository.php';
 require_once 'database/Connection.php';
+require_once 'database/QueryBuilder.php';
+require_once  'core/App.php';
 
 $errores = [];
 $mensaje = '';
@@ -13,10 +18,14 @@ $descripcion = '';
 $precio = '';
 
 
+try {
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $config = require_once 'app/config.php';
+    App::bind('config', $config);
 
-    try {
+    $prodRepository = new ProductoRepository();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $titulo = trim(htmlspecialchars($_POST['titulo']));
         $subtitulo = trim(htmlspecialchars($_POST['subtitulo']));
@@ -30,27 +39,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         //$imagen->copyFile(ImagenProducto::RUTA_IMAGENES_SHOP, ImagenProducto::RUTA_IMAGENES_PRODUCTO);
         $imagen->resizeFile(ImagenProducto::RUTA_IMAGENES_PRODUCTO, ImagenProducto::RUTA_IMAGENES_SHOP);
 
+        $productoTienda = new ImagenProducto($titulo, $subtitulo, $descripcion, $precio, $imagen->getFileName());
+        $prodRepository->save($productoTienda);
 
-        $connection = Connection::make();
-        $sql = "INSERT INTO productos (titulo, subtitulo, descripcion, precio, nombreImagen) VALUES (:titulo, :subtitulo, :descripcion, :precio, :nombreImagen)";
-
-        $pdoStatement = $connection->prepare($sql);
-
-        $parameters = [':titulo' => $titulo, ':subtitulo' => $subtitulo, ':descripcion' => $descripcion,
-            ':precio' => $precio, ':nombreImagen' => $imagen->getFileName()];
-
-        if ($pdoStatement->execute($parameters) === false)
-        {
-            $errores[] = "No se ha podido guardar el producto en la base de datos.";
-        }
-        else{
-            $titulo = '';
-            $subtitulo = '';
-            $descripcion = '';
-            $precio = '';
-            $mensaje = 'Se ha guardado el producto.';
-        }
-
+        $titulo = "";
+        $subtitulo = "";
+        $descripcion = "";
+        $precio = null;
+        $mensaje = 'Producto creado correctamente.';
 
         /*if (empty($titulo)) {
             $errores[] = "El título no se puede quedar vacío.";
@@ -70,13 +66,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         }*/
 
     }
-    catch (FileException $fileException)
-    {
-        $errores[] = $fileException->getMessage();
-    }
 
+    $productos = $prodRepository->findAll();
 }
-
+catch (FileException $fileException)
+{
+    $errores[] = $fileException->getMessage();
+}
+catch (QueryException $queryException)
+{
+    $errores[] = $queryException->getMessage();
+}
+catch (AppException $appException)
+{
+    $errores[] = $appException->getMessage();
+}
 
 
 require 'views/nuevoProducto.view.php';

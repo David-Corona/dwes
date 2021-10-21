@@ -12,7 +12,7 @@
                     <hr>
 
 
-                    <div class="col-md-12 contact">
+                    <div>
                         <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') : ?>
                             <div class="alert alert-<?= empty($errores) ? 'success' : 'danger'; ?> alert-dismissible" role="alert">
                                 <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -61,8 +61,37 @@
                             <div class="clear">Los campos marcados con (*) son obligatorios.</div>
                         </form>
                     </div>
-
-
+                    <hr>
+                    <div class="clear">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Subtitulo</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Precio</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($productos as $imagen) : ?>
+                                <tr>
+                                    <th scope="row"><?= $imagen->getId() ?></th>
+                                    <td>
+                                        <img src="<?= $imagen->getNombreImagen() ?>"
+                                             alt="<?= $imagen->getNombreImagen() ?>"
+                                             title="<?= $imagen->getTitulo() ?>"
+                                    </td>
+                                    <td><?= $imagen->getTitulo() ?></td>
+                                    <td><?= $imagen->getSubtitulo() ?></td>
+                                    <td><?= $imagen->getDescripcion() ?></td>
+                                    <td><?= $imagen->getPrecio() ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
 
 
 

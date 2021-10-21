@@ -1,10 +1,15 @@
 <?php
+require_once __DIR__ . '/../database/IEntity.php';
 
-class ImagenProducto
+class ImagenProducto implements IEntity
 {
     const RUTA_IMAGENES_SHOP = 'images/shop/';
     const RUTA_IMAGENES_PRODUCTO = 'images/producto/';
 
+    /**
+     * @var int
+     */
+    private $id;
     /**
      * @var string
      */
@@ -13,6 +18,10 @@ class ImagenProducto
      * @var string
      */
     private $subtitulo;
+    /**
+     * @var string
+     */
+    private $descripcion;
     /**
      * @var float
      */
@@ -24,14 +33,18 @@ class ImagenProducto
 
 
     /**
-     * @param string $subtitulo
-     * @param float $precio
      * @param string $titulo
+     * @param string $subtitulo
+     * @param string $descripcion
+     * @param float|int $precio
+     * @param string $nombreImagen.
      */
-    public function __construct(string $titulo, string $subtitulo, float $precio, string $nombreImagen='default.png')
+    public function __construct(string $titulo='', string $subtitulo='', string $descripcion='', float $precio=0, string $nombreImagen='default.png')
     {
+        $this->id = null;
         $this->titulo = $titulo;
         $this->subtitulo = $subtitulo;
+        $this->descripcion = $descripcion;
         $this->precio = $precio;
         $this->nombreImagen = $nombreImagen;
     }
@@ -44,6 +57,21 @@ class ImagenProducto
         return $this->getTitulo();
     }
 
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return ImagenProducto
+     */
+    public function setId(int $id): ImagenProducto
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     /**
      * @return string
@@ -78,6 +106,24 @@ class ImagenProducto
     public function setSubtitulo(string $subtitulo): ImagenProducto
     {
         $this->subtitulo = $subtitulo;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescripcion(): string
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * @param string $descripcion
+     * @return ImagenProducto
+     */
+    public function setDescripcion(string $descripcion): ImagenProducto
+    {
+        $this->descripcion = $descripcion;
         return $this;
     }
 
@@ -123,4 +169,18 @@ class ImagenProducto
         return self::RUTA_IMAGENES_SHOP . $this->getNombreImagen();
     }
 
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'titulo' => $this->getTitulo(),
+            'subtitulo' => $this->getSubtitulo(),
+            'descripcion' => $this->getDescripcion(),
+            'precio' => $this->getPrecio(),
+            'nombreImagen' => $this->getUrlImagen()
+        ];
+    }
 }
