@@ -42,6 +42,13 @@
                                 <p><label for="descripcion">Descripción</label>
                                     <textarea name="descripcion" rows="5" cols="40" ><?= $GLOBALS['descripcion'] ?></textarea></p>
 
+                                <p><label for="categoria">(*) Categoría</label>
+                                    <select name="categoria">
+                                        <?php foreach ($categorias as $categoria) : ?>
+                                            <option value="<?= $categoria->getId() ?>"><?= $categoria->getNombre() ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+
                                 <p><label for="precio">(*) Precio</label>
                                     <input type="number" name="precio" min="0.00" max="1000" step="0.01" value="<?= $GLOBALS['precio'] ?>" required></p>
 
@@ -71,6 +78,7 @@
                                 <th scope="col">Titulo</th>
                                 <th scope="col">Subtitulo</th>
                                 <th scope="col">Descripcion</th>
+                                <th scope="col">Categoría</th>
                                 <th scope="col">Precio</th>
                             </tr>
                             </thead>
@@ -86,6 +94,7 @@
                                     <td><?= $imagen->getTitulo() ?></td>
                                     <td><?= $imagen->getSubtitulo() ?></td>
                                     <td><?= $imagen->getDescripcion() ?></td>
+                                    <td><?= $imagen->getCategoria() ?></td>
                                     <td><?= $imagen->getPrecio() ?></td>
                                 </tr>
                             <?php endforeach; ?>

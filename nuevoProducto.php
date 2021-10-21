@@ -5,7 +5,9 @@ require_once 'exceptions/QueryException.php';
 require_once 'exceptions/AppException.php';
 require_once 'utils/File.php';
 require_once 'entity/ImagenProducto.php';
+require_once 'entity/Categoria.php';
 require_once 'repository/ProductoRepository.php';
+require_once 'repository/CategoriaRepository.php';
 require_once 'database/Connection.php';
 require_once 'database/QueryBuilder.php';
 require_once  'core/App.php';
@@ -24,13 +26,17 @@ try {
     App::bind('config', $config);
 
     $prodRepository = new ProductoRepository();
+    $categoriaRepository = new CategoriaRepository();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $titulo = trim(htmlspecialchars($_POST['titulo']));
         $subtitulo = trim(htmlspecialchars($_POST['subtitulo']));
         $descripcion = trim(htmlspecialchars($_POST['descripcion']));
+        $categoria = trim(htmlspecialchars($_POST['categoria']));
         $precio = (float)$_POST['precio'];
+        if (empty($categoria))
+            throw new ValidationException('No se ha recibido la categoría.');
 
         $tiposAceptados = ['image/jpeg', 'image/png', 'image/gif'];
         $imagen = new File('imagen', $tiposAceptados); //imagen es el name del input file
@@ -39,7 +45,7 @@ try {
         //$imagen->copyFile(ImagenProducto::RUTA_IMAGENES_SHOP, ImagenProducto::RUTA_IMAGENES_PRODUCTO);
         $imagen->resizeFile(ImagenProducto::RUTA_IMAGENES_PRODUCTO, ImagenProducto::RUTA_IMAGENES_SHOP);
 
-        $productoTienda = new ImagenProducto($titulo, $subtitulo, $descripcion, $precio, $imagen->getFileName());
+        $productoTienda = new ImagenProducto($titulo, $subtitulo, $descripcion, $categoria, $precio, $imagen->getFileName());
         $prodRepository->save($productoTienda);
 
         $titulo = "";
@@ -68,6 +74,7 @@ try {
     }
 
     $productos = $prodRepository->findAll();
+    $categorias = $categoriaRepository->findAll();
 }
 catch (FileException $fileException)
 {
@@ -80,6 +87,10 @@ catch (QueryException $queryException)
 catch (AppException $appException)
 {
     $errores[] = $appException->getMessage();
+}
+catch (ValidationException $validationException)
+{
+    $errores[] = $validationException->getMessage();
 }
 
 

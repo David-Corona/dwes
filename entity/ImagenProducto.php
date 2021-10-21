@@ -30,6 +30,10 @@ class ImagenProducto implements IEntity
      * @var string
      */
     private $nombreImagen;
+    /**
+     * @var int
+     */
+    private $categoria;
 
 
     /**
@@ -39,7 +43,8 @@ class ImagenProducto implements IEntity
      * @param float|int $precio
      * @param string $nombreImagen.
      */
-    public function __construct(string $titulo='', string $subtitulo='', string $descripcion='', float $precio=0, string $nombreImagen='default.png')
+    public function __construct(string $titulo='', string $subtitulo='', string $descripcion='',
+                                int $categoria=0, float $precio=0, string $nombreImagen='default.png')
     {
         $this->id = null;
         $this->titulo = $titulo;
@@ -47,6 +52,7 @@ class ImagenProducto implements IEntity
         $this->descripcion = $descripcion;
         $this->precio = $precio;
         $this->nombreImagen = $nombreImagen;
+        $this->categoria = $categoria;
     }
 
     /**
@@ -61,16 +67,6 @@ class ImagenProducto implements IEntity
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return ImagenProducto
-     */
-    public function setId(int $id): ImagenProducto
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**
@@ -163,6 +159,23 @@ class ImagenProducto implements IEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getCategoria(): int
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * @param int $categoria
+     * @return ImagenProducto
+     */
+    public function setCategoria(int $categoria): ImagenProducto
+    {
+        $this->categoria = $categoria;
+        return $this;
+    }
 
     public function getUrlImagen() : string
     {
@@ -180,7 +193,8 @@ class ImagenProducto implements IEntity
             'subtitulo' => $this->getSubtitulo(),
             'descripcion' => $this->getDescripcion(),
             'precio' => $this->getPrecio(),
-            'nombreImagen' => $this->getUrlImagen()
+            'nombreImagen' => $this->getUrlImagen(),
+            'categoria' => $this->getCategoria()
         ];
     }
 }
