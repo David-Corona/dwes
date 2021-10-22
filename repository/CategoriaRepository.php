@@ -8,4 +8,16 @@ class CategoriaRepository extends QueryBuilder
     {
         parent::__construct($table, $classEntity);
     }
+
+    //incrementar el numero de productos en categoria
+
+    /**
+     * @param Categoria $categoria
+     * @throws QueryException
+     */
+    public function nuevoProducto(Categoria $categoria)
+    {
+        $categoria->setNumProductos($categoria->getNumProductos()+1);
+        $this->update($categoria);
+    }
 }

@@ -83,19 +83,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($productos as $imagen) : ?>
+                            <?php foreach (($productos ?? []) as $producto) : ?>
                                 <tr>
-                                    <th scope="row"><?= $imagen->getId() ?></th>
+                                    <th scope="row"><?= $producto->getId() ?></th>
                                     <td>
-                                        <img src="<?= $imagen->getNombreImagen() ?>"
-                                             alt="<?= $imagen->getNombreImagen() ?>"
-                                             title="<?= $imagen->getTitulo() ?>"
+                                        <img src="<?= $producto->getNombreImagen() ?>"
+                                             alt="<?= $producto->getNombreImagen() ?>"
+                                             title="<?= $producto->getTitulo() ?>"
                                     </td>
-                                    <td><?= $imagen->getTitulo() ?></td>
-                                    <td><?= $imagen->getSubtitulo() ?></td>
-                                    <td><?= $imagen->getDescripcion() ?></td>
-                                    <td><?= $imagen->getCategoria() ?></td>
-                                    <td><?= $imagen->getPrecio() ?></td>
+                                    <td><?= $producto->getTitulo() ?></td>
+                                    <td><?= $producto->getSubtitulo() ?></td>
+                                    <td><?= $producto->getDescripcion() ?></td>
+                                    <td><?= $prodRepository->getCategoria($producto)->getNombre() ?></td>
+                                    <td><?= $producto->getPrecio() ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

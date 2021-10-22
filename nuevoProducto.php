@@ -10,13 +10,14 @@ require_once 'repository/ProductoRepository.php';
 require_once 'repository/CategoriaRepository.php';
 require_once 'database/Connection.php';
 require_once 'database/QueryBuilder.php';
-require_once  'core/App.php';
+require_once 'core/App.php';
 
 $errores = [];
 $mensaje = '';
 $titulo = '';
 $subtitulo = '';
 $descripcion = '';
+$categoria = '';
 $precio = '';
 
 
@@ -33,10 +34,10 @@ try {
         $titulo = trim(htmlspecialchars($_POST['titulo']));
         $subtitulo = trim(htmlspecialchars($_POST['subtitulo']));
         $descripcion = trim(htmlspecialchars($_POST['descripcion']));
-        $categoria = trim(htmlspecialchars($_POST['categoria']));
+        $categoria = (int)$_POST['categoria'];
         $precio = (float)$_POST['precio'];
-        if (empty($categoria))
-            throw new ValidationException('No se ha recibido la categoría.');
+        /*if (empty($categoria))
+            throw new ValidationException('No se ha recibido la categoría.');*/
 
         $tiposAceptados = ['image/jpeg', 'image/png', 'image/gif'];
         $imagen = new File('imagen', $tiposAceptados); //imagen es el name del input file
@@ -46,12 +47,13 @@ try {
         $imagen->resizeFile(ImagenProducto::RUTA_IMAGENES_PRODUCTO, ImagenProducto::RUTA_IMAGENES_SHOP);
 
         $productoTienda = new ImagenProducto($titulo, $subtitulo, $descripcion, $categoria, $precio, $imagen->getFileName());
-        $prodRepository->save($productoTienda);
+        //$prodRepository->save($productoTienda);
+        $prodRepository->guarda($productoTienda);
 
-        $titulo = "";
-        $subtitulo = "";
-        $descripcion = "";
-        $precio = null;
+        $titulo = '';
+        $subtitulo = '';
+        $descripcion = '';
+        $precio = 0;
         $mensaje = 'Producto creado correctamente.';
 
         /*if (empty($titulo)) {

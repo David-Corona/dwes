@@ -40,8 +40,9 @@ class ImagenProducto implements IEntity
      * @param string $titulo
      * @param string $subtitulo
      * @param string $descripcion
+     * @param int $categoria
      * @param float|int $precio
-     * @param string $nombreImagen.
+     * @param string $nombreImagen
      */
     public function __construct(string $titulo='', string $subtitulo='', string $descripcion='',
                                 int $categoria=0, float $precio=0, string $nombreImagen='default.png')
@@ -192,9 +193,9 @@ class ImagenProducto implements IEntity
             'titulo' => $this->getTitulo(),
             'subtitulo' => $this->getSubtitulo(),
             'descripcion' => $this->getDescripcion(),
+            'categoria' => $this->getCategoria(),
             'precio' => $this->getPrecio(),
-            'nombreImagen' => $this->getUrlImagen(),
-            'categoria' => $this->getCategoria()
+            'nombreImagen' => $this->getUrlImagen()
         ];
     }
 }
