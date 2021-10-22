@@ -4,7 +4,7 @@ require_once 'exceptions/FileException.php';
 require_once 'exceptions/QueryException.php';
 require_once 'exceptions/AppException.php';
 require_once 'utils/File.php';
-require_once 'entity/ImagenProducto.php';
+require_once 'entity/Producto.php';
 require_once 'entity/Categoria.php';
 require_once 'repository/ProductoRepository.php';
 require_once 'repository/CategoriaRepository.php';
@@ -42,11 +42,11 @@ try {
         $tiposAceptados = ['image/jpeg', 'image/png', 'image/gif'];
         $imagen = new File('imagen', $tiposAceptados); //imagen es el name del input file
 
-        $imagen->saveUploadFile(ImagenProducto::RUTA_IMAGENES_PRODUCTO);
-        //$imagen->copyFile(ImagenProducto::RUTA_IMAGENES_SHOP, ImagenProducto::RUTA_IMAGENES_PRODUCTO);
-        $imagen->resizeFile(ImagenProducto::RUTA_IMAGENES_PRODUCTO, ImagenProducto::RUTA_IMAGENES_SHOP);
+        $imagen->saveUploadFile(Producto::RUTA_IMAGENES_PRODUCTO);
+        //$imagen->copyFile(Producto::RUTA_IMAGENES_SHOP, Producto::RUTA_IMAGENES_PRODUCTO);
+        $imagen->resizeFile(Producto::RUTA_IMAGENES_PRODUCTO, Producto::RUTA_IMAGENES_SHOP);
 
-        $productoTienda = new ImagenProducto($titulo, $subtitulo, $descripcion, $categoria, $precio, $imagen->getFileName());
+        $productoTienda = new Producto($titulo, $subtitulo, $descripcion, $categoria, $precio, $imagen->getFileName());
         //$prodRepository->save($productoTienda);
         $prodRepository->guarda($productoTienda);
 

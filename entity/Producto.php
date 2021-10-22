@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../database/IEntity.php';
 
-class ImagenProducto implements IEntity
+class Producto implements IEntity
 {
     const RUTA_IMAGENES_SHOP = 'images/shop/';
     const RUTA_IMAGENES_PRODUCTO = 'images/producto/';
@@ -80,9 +80,9 @@ class ImagenProducto implements IEntity
 
     /**
      * @param string $titulo
-     * @return ImagenProducto
+     * @return Producto
      */
-    public function setTitulo(string $titulo): ImagenProducto
+    public function setTitulo(string $titulo): Producto
     {
         $this->titulo = $titulo;
         return $this;
@@ -98,9 +98,9 @@ class ImagenProducto implements IEntity
 
     /**
      * @param string $subtitulo
-     * @return ImagenProducto
+     * @return Producto
      */
-    public function setSubtitulo(string $subtitulo): ImagenProducto
+    public function setSubtitulo(string $subtitulo): Producto
     {
         $this->subtitulo = $subtitulo;
         return $this;
@@ -116,9 +116,9 @@ class ImagenProducto implements IEntity
 
     /**
      * @param string $descripcion
-     * @return ImagenProducto
+     * @return Producto
      */
-    public function setDescripcion(string $descripcion): ImagenProducto
+    public function setDescripcion(string $descripcion): Producto
     {
         $this->descripcion = $descripcion;
         return $this;
@@ -134,9 +134,9 @@ class ImagenProducto implements IEntity
 
     /**
      * @param float $precio
-     * @return ImagenProducto
+     * @return Producto
      */
-    public function setPrecio(float $precio): ImagenProducto
+    public function setPrecio(float $precio): Producto
     {
         $this->precio = $precio;
         return $this;
@@ -152,9 +152,9 @@ class ImagenProducto implements IEntity
 
     /**
      * @param string $nombreImagen
-     * @return ImagenProducto
+     * @return Producto
      */
-    public function setNombreImagen(string $nombreImagen): ImagenProducto
+    public function setNombreImagen(string $nombreImagen): Producto
     {
         $this->nombreImagen = $nombreImagen;
         return $this;
@@ -170,9 +170,9 @@ class ImagenProducto implements IEntity
 
     /**
      * @param int $categoria
-     * @return ImagenProducto
+     * @return Producto
      */
-    public function setCategoria(int $categoria): ImagenProducto
+    public function setCategoria(int $categoria): Producto
     {
         $this->categoria = $categoria;
         return $this;

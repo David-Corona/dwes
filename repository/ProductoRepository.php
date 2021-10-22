@@ -8,18 +8,18 @@ class ProductoRepository extends QueryBuilder
      * @param string $classEntity
      * @throws AppException
      */
-    public function __construct(string $table='productos', string $classEntity='ImagenProducto')
+    public function __construct(string $table='productos', string $classEntity='Producto')
     {
         parent::__construct($table, $classEntity);
     }
 
     /**
-     * @param ImagenProducto $imagenProducto
+     * @param Producto $imagenProducto
      * @return Categoria
      * @throws NotFoundException
      * @throws QueryException
      */
-    public function getCategoria(ImagenProducto $imagenProducto) : Categoria
+    public function getCategoria(Producto $imagenProducto) : Categoria
     {
         $categoriaRepository = new CategoriaRepository();
         return $categoriaRepository->find($imagenProducto->getCategoria());
@@ -28,10 +28,10 @@ class ProductoRepository extends QueryBuilder
     //incrementar número de producto en categoría y guardar producto
 
     /**
-     * @param ImagenProducto $imagenProducto
+     * @param Producto $imagenProducto
      * @throws QueryException
      */
-    public function guarda(ImagenProducto $imagenProducto)
+    public function guarda(Producto $imagenProducto)
     {
         $fnGuardaProducto = function () use ($imagenProducto)
         {
