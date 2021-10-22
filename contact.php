@@ -1,49 +1,64 @@
 <?php
+require_once 'entity/Mensaje.php';
+require_once 'repository/MensajeRepository.php';
+require_once 'database/Connection.php';
 
 $errores = [];
 $mensajeOk = '';
+$nombre = '';
+$apellidos = '';
+$email = '';
+$asunto = '';
+$texto = '';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = trim(htmlspecialchars($_POST['nombre']));
-    $apellidos = trim(htmlspecialchars($_POST['apellidos']));
-    $email = trim(htmlspecialchars($_POST['email']));
-    $asunto = trim(htmlspecialchars($_POST['asunto']));
-    $texto = trim(htmlspecialchars($_POST['texto']));
 
-    if (empty($nombre)) {
-        $errores[] = "El nombre no se puede quedar vació";
-    }
+try {
+    $config = require_once 'app/config.php';
+    App::bind('config', $config);
 
-    if (empty($email)) {
-        $errores[] = "El email no se puede quedar vació";
-    } else {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            $errores[] = "El email no es válido";
+    $mensajeRepository = new MensajeRepository();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nombre = trim(htmlspecialchars($_POST['nombre']));
+        $apellidos = trim(htmlspecialchars($_POST['apellidos']));
+        $email = trim(htmlspecialchars($_POST['email']));
+        $asunto = trim(htmlspecialchars($_POST['asunto']));
+        $texto = trim(htmlspecialchars($_POST['texto']));
+
+        if (empty($nombre)) {
+            $errores[] = "El nombre no se puede quedar vació";
         }
-    }
 
-    if (empty($asunto)) {
-        $errores[] = "El asunto no se puede quedar vació";
-    }
+        if (empty($email)) {
+            $errores[] = "El email no se puede quedar vació";
+        } else {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                $errores[] = "El email no es válido";
+            }
+        }
 
-    if (empty($errores)) {
+        if (empty($asunto)) {
+            $errores[] = "El asunto no se puede quedar vació";
+        }
 
-        require_once 'database/Connection.php';
+        if (empty($errores)) {
+            $mensaje = new Mensaje($nombre, $apellidos, $asunto, $email, $texto);
+            $mensajeRepository->save($mensaje);
+            //$prodRepository->guarda($productoTienda);
 
-        $config = require_once 'app/config.php';
-        $connection = Connection::make($config['database']);
-
-        $sql = "INSERT INTO mensajes (nombre, apellidos, asunto, email, texto, fecha) VALUES ('$nombre', '$apellidos', '$email', '$asunto', '$texto', now())";
-        if ($connection->exec($sql) === false)
-        {
-            $errores[] = 'No se ha podido guardar el mensaje en la base de datos.';
-        } else
-        {
             $mensajeOk = "Gracias por contactar con nosotros.";
         }
 
     }
-
 }
+catch (ValidationException $validationException)
+{
+    $errores[] = $validationException->getMessage();
+}
+catch (QueryException $queryException)
+{
+    $errores[] = $queryException->getMessage();
+}
+
     require 'utils/utils.php';
     require 'views/contact.view.php';

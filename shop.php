@@ -1,6 +1,9 @@
 <?php
 
     require_once 'entity/ImagenProducto.php';
+    require_once 'repository/ProductoRepository.php';
+    require_once 'core/App.php';
+    require_once 'database/Connection.php';
 
     /**
      * @var ImagenProducto[] $imagenes
@@ -15,6 +18,12 @@
         new ImagenProducto('PACK BLACK CROWN PITON', 'Incluye pala, bandolera Siux, monedero Vision y overgrip.', 'Pack_BP_Piton.jpg', 1,146.00),
         new ImagenProducto('BULLPADEL FLOW', 'Para para mujer, ofrece un juego lleno de comodidad.', 'BP_Flow.jpg', 1, 199.95)
     ];
+
+    $config = require_once 'app/config.php';
+    App::bind('config', $config);
+
+    $prodRepository = new ProductoRepository();
+    $productos = $prodRepository->findAll();
 
 
     require 'utils/utils.php';
