@@ -1,5 +1,5 @@
 <?php
-require_once 'utils/utils.php';
+/*require_once 'utils/Utils.php';
 require_once 'exceptions/FileException.php';
 require_once 'exceptions/QueryException.php';
 require_once 'exceptions/AppException.php';
@@ -10,7 +10,12 @@ require_once 'repository/ProductoRepository.php';
 require_once 'repository/CategoriaRepository.php';
 require_once 'database/Connection.php';
 require_once 'database/QueryBuilder.php';
-require_once 'core/App.php';
+require_once 'core/App.php';*/
+
+use cursophp7dc\app\exceptions\AppException;
+use cursophp7dc\app\exceptions\QueryException;
+use cursophp7dc\app\repository\CategoriaRepository;
+use cursophp7dc\app\repository\ProductoRepository;
 
 $errores = [];
 $mensaje = '';

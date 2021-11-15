@@ -1,6 +1,8 @@
 <?php
-//array estático que alamcenará los objetos del contenedor
-require_once __DIR__ . '/../exceptions/AppException.php';
+namespace cursophp7dc\core;
+
+use cursophp7dc\app\exceptions\AppException;
+use cursophp7dc\core\database\Connection;
 
 class App
 {

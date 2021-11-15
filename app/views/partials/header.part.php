@@ -9,17 +9,17 @@
                     <div class="menu">
                         <a class="toggleMenu" href="#"><img src="../images/nav.png" alt="" /></a>
                         <ul class="nav" id="nav">
-                            <li class="<?= opcionMenuActiva('index') ? 'current' : '' ?>" >
-                                <a href="<?= opcionMenuActiva('index') ? '#' : '/' ?>">Home</a>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('index') ? 'current' : '' ?>" >
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('index') ? '#' : '/' ?>">Home</a>
                             </li>
-                            <li class="<?= opcionMenuActivaEnArray(['shop', 'single']) ? 'current' : '' ?>" >
-                                <a href="<?= opcionMenuActiva('shop') ? '#' : '/shop' ?>">Shop</a>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActivaEnArray(['shop', 'single']) ? 'current' : '' ?>" >
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('shop') ? '#' : '/shop' ?>">Shop</a>
                             </li>
-                            <li class="<?= opcionMenuActiva('nuevoProducto') ? 'current' : '' ?>" >
-                                <a href="<?= opcionMenuActiva('nuevoProducto') ? '#' : '/productos' ?>">Productos</a>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('nuevoProducto') ? 'current' : '' ?>" >
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('nuevoProducto') ? '#' : '/productos' ?>">Productos</a>
                             </li>
-                            <li class="<?= opcionMenuActiva('contact') ? 'current' : '' ?>">
-                                <a href="<?= opcionMenuActiva('contact') ? '#' : '/contact' ?>">Contact</a>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? 'current' : '' ?>">
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? '#' : '/contact' ?>">Contact</a>
                             </li>
                             <div class="clear"></div>
                         </ul>

@@ -1,7 +1,13 @@
 <?php
-require_once 'entity/Mensaje.php';
-require_once 'repository/MensajeRepository.php';
-require_once 'database/Connection.php';
+
+use cursophp7dc\app\entity\Mensaje;
+use cursophp7dc\app\exceptions\QueryException;
+use cursophp7dc\app\exceptions\ValidationException;
+use cursophp7dc\app\repository\MensajeRepository;
+
+//require_once 'entity/Mensaje.php';
+//require_once 'repository/MensajeRepository.php';
+//require_once 'database/Connection.php';
 
 $errores = [];
 $mensajeOk = '';
@@ -58,5 +64,5 @@ catch (QueryException $queryException)
     $errores[] = $queryException->getMessage();
 }
 
-    require 'utils/utils.php';
+    //require 'utils/Utils.php';
     require __DIR__ . '/../views/contact.view.php';

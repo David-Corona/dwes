@@ -1,6 +1,12 @@
 <?php
-require_once __DIR__ . '/../exceptions/QueryException.php';
-require_once __DIR__ . '/../core/App.php';
+namespace cursophp7dc\core\database;
+
+use cursophp7dc\app\exceptions\AppException;
+use cursophp7dc\app\exceptions\NotFoundException;
+use cursophp7dc\app\exceptions\QueryException;
+use cursophp7dc\core\App;
+use PDO;
+use PDOException;
 
 abstract class QueryBuilder
 {

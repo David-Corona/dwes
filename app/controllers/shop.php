@@ -1,13 +1,15 @@
 <?php
 
-    require_once 'entity/Producto.php';
+    /*require_once 'entity/Producto.php';
     require_once 'repository/ProductoRepository.php';
     require_once 'core/App.php';
-    require_once 'database/Connection.php';
+    require_once 'database/Connection.php';*/
 
 
-    $prodRepository = new ProductoRepository();
-    $productos = $prodRepository->findAll();
+use cursophp7dc\app\repository\ProductoRepository;
 
-    require 'utils/utils.php';
+$prodRepository = new ProductoRepository();
+$productos = $prodRepository->findAll();
+
+    //require 'utils/Utils.php';
     require __DIR__ . '/../views/shop.view.php';

@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . '/../database/IEntity.php';
+namespace cursophp7dc\app\entity;
+
+use cursophp7dc\core\database\IEntity;
+use DateTime;
 
 class Mensaje implements IEntity
 {

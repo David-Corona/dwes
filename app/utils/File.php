@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '/../exceptions/FileException.php';
+namespace cursophp7dc\app\utils;
+
+use cursophp7dc\app\exceptions\FileException;
 
 class File
 {

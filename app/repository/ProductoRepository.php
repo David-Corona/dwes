@@ -1,5 +1,12 @@
 <?php
-require_once __DIR__ . '/../database/QueryBuilder.php';
+namespace cursophp7dc\app\repository;
+
+use cursophp7dc\app\entity\Categoria;
+use cursophp7dc\app\entity\Producto;
+use cursophp7dc\app\exceptions\AppException;
+use cursophp7dc\app\exceptions\NotFoundException;
+use cursophp7dc\app\exceptions\QueryException;
+use cursophp7dc\core\database\QueryBuilder;
 
 class ProductoRepository extends QueryBuilder
 {
@@ -8,7 +15,7 @@ class ProductoRepository extends QueryBuilder
      * @param string $classEntity
      * @throws AppException
      */
-    public function __construct(string $table='productos', string $classEntity='Producto')
+    public function __construct(string $table='productos', string $classEntity=Producto::class)
     {
         parent::__construct($table, $classEntity);
     }

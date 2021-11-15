@@ -1,4 +1,7 @@
 <?php
+namespace cursophp7dc\core;
+
+use cursophp7dc\app\exceptions\NotFoundException;
 
 class Router
 {
