@@ -4,22 +4,22 @@
             <div class="col-md-12">
                 <div class="header-left">
                     <div class="logo">
-                        <a href="index.php"><img src="../images/logo.png" alt=""/></a>
+                        <a href="/"><img src="../images/logo.png" alt=""/></a>
                     </div>
                     <div class="menu">
                         <a class="toggleMenu" href="#"><img src="../images/nav.png" alt="" /></a>
                         <ul class="nav" id="nav">
                             <li class="<?= opcionMenuActiva('index') ? 'current' : '' ?>" >
-                                <a href="<?= opcionMenuActiva('index') ? '#' : 'index.php' ?>">Home</a>
+                                <a href="<?= opcionMenuActiva('index') ? '#' : '/' ?>">Home</a>
                             </li>
                             <li class="<?= opcionMenuActivaEnArray(['shop', 'single']) ? 'current' : '' ?>" >
-                                <a href="<?= opcionMenuActiva('shop') ? '#' : 'shop.php' ?>">Shop</a>
+                                <a href="<?= opcionMenuActiva('shop') ? '#' : '/shop' ?>">Shop</a>
                             </li>
-                            <li class="<?= opcionMenuActiva('team') ? 'current' : '' ?>" >
-                                <a href="<?= opcionMenuActiva('team') ? '#' : 'team.php' ?>">Team</a>
+                            <li class="<?= opcionMenuActiva('nuevoProducto') ? 'current' : '' ?>" >
+                                <a href="<?= opcionMenuActiva('nuevoProducto') ? '#' : '/productos' ?>">Productos</a>
                             </li>
                             <li class="<?= opcionMenuActiva('contact') ? 'current' : '' ?>">
-                                <a href="<?= opcionMenuActiva('contact') ? '#' : 'contact.php' ?>">Contact</a>
+                                <a href="<?= opcionMenuActiva('contact') ? '#' : '/contact' ?>">Contact</a>
                             </li>
                             <div class="clear"></div>
                         </ul>
@@ -56,8 +56,8 @@
                                 <li class="list_desc"><h4><a href="#">velit esse molestie</a></h4><span class="actual">1 x
                           $12.00</span></li>
                                 <div class="login_buttons">
-                                    <div class="check_button"><a href="checkout.php">Check out</a></div>
-                                    <div class="login_button"><a href="login.php">Login</a></div>
+                                    <div class="check_button"><a href="/checkout">Check out</a></div>
+                                    <div class="login_button"><a href="/login">Login</a></div>
                                     <div class="clear"></div>
                                 </div>
                                 <div class="clear"></div>

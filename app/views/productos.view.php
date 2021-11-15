@@ -29,7 +29,7 @@
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
-                        <form method="post" action="<?= $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
+                        <form method="post" action="/productos/nuevo" enctype="multipart/form-data">
                             <div class="">
 
 

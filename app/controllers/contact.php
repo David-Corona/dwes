@@ -13,8 +13,6 @@ $texto = '';
 
 
 try {
-    $config = require_once 'app/config.php';
-    App::bind('config', $config);
 
     $mensajeRepository = new MensajeRepository();
 
@@ -61,4 +59,4 @@ catch (QueryException $queryException)
 }
 
     require 'utils/utils.php';
-    require 'views/contact.view.php';
+    require __DIR__ . '/../views/contact.view.php';
