@@ -3,6 +3,7 @@ namespace cursophp7dc\core;
 
 use cursophp7dc\app\exceptions\AppException;
 use cursophp7dc\core\database\Connection;
+use cursophp7dc\core\database\QueryBuilder;
 
 class App
 {
@@ -39,5 +40,17 @@ class App
         if (! array_key_exists('connection', static::$container))
             static::$container['connection'] = Connection::make();
         return static::$container['connection'];
+    }
+
+    /**
+     * @param string $className
+     * @return QueryBuilder
+     */
+    public static function getRepository(string $className): QueryBuilder
+    {
+        if (! array_key_exists($className, static::$container))
+            static::$container [$className] = new $className();
+
+        return static::$container[$className];
     }
 }

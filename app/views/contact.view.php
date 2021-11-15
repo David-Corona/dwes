@@ -51,7 +51,7 @@
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
-                    <form method="post" action="<?= $_SERVER['PHP_SELF'] ?>" >
+                    <form method="post" action="/mensaje" >
                         <div class="left-contact">
                             <p><label for="nombre">(*) Nombre</label>
                            <input type="text" class="text" name="nombre" value="<?= $GLOBALS['nombre'] ?>" required></p>
@@ -65,9 +65,13 @@
                            <input type="text" class="text" name="asunto" value="<?= $GLOBALS['asunto'] ?>" required></p>
                            <p><label for="nombre">Mensaje</label>
                            <textarea name="texto" ><?= $GLOBALS['texto'] ?></textarea></p>
-                           <div class="form-submit">
+
+                           <button class="">ENVIAR</button>
+
+                           <!--<div class="form-submit">
                               <input name="submit" type="submit" id="submit" value="Submit"><br>
-                           </div>
+                           </div>-->
+
                        </div>
                        <div class="clear">Los campos marcados con (*) son obligatorios.</div>
                    </form>

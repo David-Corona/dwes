@@ -10,4 +10,10 @@ class MensajeRepository extends QueryBuilder
     {
         parent::__construct($table, $classEntity);
     }
+
+    public function getCategoria(Producto $imagenProducto) : Categoria
+    {
+        $categoriaRepository = new CategoriaRepository();
+        return $categoriaRepository->find($imagenProducto->getCategoria());
+    }
 }

@@ -11,3 +11,4 @@ $router->get('register', 'app/controllers/register.php');
 $router->get('experiance', 'app/controllers/experiance.php');
 $router->get('team', 'app/controllers/team.php');
 $router->post('productos/nuevo', 'app/controllers/nuevo-producto.php');
+$router->post('mensaje', 'app/controllers/mensaje.php');
