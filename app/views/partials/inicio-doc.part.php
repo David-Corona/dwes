@@ -16,6 +16,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <script src="../js/jquery.min.js"></script>
 
+
     <script type="text/javascript">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
@@ -47,3 +48,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             });
         });
     </script>
+
+    <!-- Pagina single -->
+    <!----details-product-slider--->
+    <!-- Include the Etalage files -->
+    <link rel="stylesheet" href="../../public/css/etalage.css">
+    <script src="../../public/js/jquery.etalage.min.js"></script>
+    <!-- Include the Etalage files -->
+    <script>
+        jQuery(document).ready(function($){
+
+            $('#etalage').etalage({
+                thumb_image_width: 300,
+                thumb_image_height: 400,
+
+                show_hint: true,
+                click_callback: function(image_anchor, instance_id){
+                    alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                }
+            });
+            // This is for the dropdown list example:
+            $('.dropdownlist').change(function(){
+                etalage_show( $(this).find('option:selected').attr('class') );
+            });
+
+        });
+    </script>
+    <!----//details-product-slider--->
+
+</head>
+

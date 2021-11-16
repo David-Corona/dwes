@@ -57,13 +57,21 @@ try {
         }*/
 
 
-} catch (FileException $fileException) {
+}
+catch (FileException $fileException)
+{
     die($fileException->getMessage());
-} catch (QueryException $queryException) {
+}
+catch (QueryException $queryException)
+{
     die($queryException->getMessage());
-} catch (ValidationException $validationException) {
+}
+catch (ValidationException $validationException)
+{
     die($validationException->getMessage());
-} catch (AppException $appException) {
+}
+catch (AppException $appException)
+{
     die($appException->getMessage());
 }
 

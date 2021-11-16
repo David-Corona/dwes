@@ -1,3 +1,4 @@
+<body>
 <div class="header">
     <div class="container">
         <div class="row">
@@ -9,18 +10,19 @@
                     <div class="menu">
                         <a class="toggleMenu" href="#"><img src="../images/nav.png" alt="" /></a>
                         <ul class="nav" id="nav">
-                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('index') ? 'current' : '' ?>" >
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActivaEnArray(['index', 'single']) ? 'current' : '' ?>" >
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('index') ? '#' : '/' ?>">Home</a>
                             </li>
-                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActivaEnArray(['shop', 'single']) ? 'current' : '' ?>" >
+                            <!--<li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActivaEnArray(['shop', 'single']) ? 'current' : '' ?>" >
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('shop') ? '#' : '/shop' ?>">Shop</a>
-                            </li>
+                            </li>-->
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('nuevoProducto') ? 'current' : '' ?>" >
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('nuevoProducto') ? '#' : '/productos' ?>">Productos</a>
                             </li>
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? 'current' : '' ?>">
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? '#' : '/contact' ?>">Contact</a>
                             </li>
+
                             <div class="clear"></div>
                         </ul>
                         <script type="text/javascript" src="../js/responsive-nav.js"></script>

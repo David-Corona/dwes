@@ -1,33 +1,6 @@
 <?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
 
-     <!----details-product-slider--->
-				<!-- Include the Etalage files -->
-					<link rel="stylesheet" href="../../css/etalage.css">
-					<script src="../../js/jquery.etalage.min.js"></script>
-				<!-- Include the Etalage files -->
-				<script>
-						jQuery(document).ready(function($){
-			
-							$('#etalage').etalage({
-								thumb_image_width: 300,
-								thumb_image_height: 400,
-								
-								show_hint: true,
-								click_callback: function(image_anchor, instance_id){
-									alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-								}
-							});
-							// This is for the dropdown list example:
-							$('.dropdownlist').change(function(){
-								etalage_show( $(this).find('option:selected').attr('class') );
-							});
-
-					});
-				</script>
-				<!----//details-product-slider--->	
-</head>
-<body>
-    <?php include __DIR__ . '/partials/header.part.php'; ?>
+<?php include __DIR__ . '/partials/header.part.php'; ?>
 
      <div class="main">
       <div class="shop_top">
@@ -38,33 +11,33 @@
 					     <ul id="etalage">
 							<li>
 								<a href="optionallink.html">
-									<img class="etalage_thumb_image" src="../../images/3.jpg" />
-									<img class="etalage_source_image" src="../../images/3.jpg" />
+									<img class="etalage_thumb_image" src="../../public/images/3.jpg" />
+									<img class="etalage_source_image" src="../../public/images/3.jpg" />
 								</a>
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="../../images/4.jpg" />
-								<img class="etalage_source_image" src="../../images/4.jpg" />
+								<img class="etalage_thumb_image" src="../../public/images/4.jpg" />
+								<img class="etalage_source_image" src="../../public/images/4.jpg" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="../../images/5.jpg" />
-								<img class="etalage_source_image" src="../../images/5.jpg" />
+								<img class="etalage_thumb_image" src="../../public/images/5.jpg" />
+								<img class="etalage_source_image" src="../../public/images/5.jpg" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="../../images/6.jpg" />
-								<img class="etalage_source_image" src="../../images/6.jpg" />
+								<img class="etalage_thumb_image" src="../../public/images/6.jpg" />
+								<img class="etalage_source_image" src="../../public/images/6.jpg" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="../../images/7.jpg" />
-								<img class="etalage_source_image" src="../../images/7.jpg" />
+								<img class="etalage_thumb_image" src="../../public/images/7.jpg" />
+								<img class="etalage_source_image" src="../../public/images/7.jpg" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="../../images/8.jpg" />
-								<img class="etalage_source_image" src="../../images/8.jpg" />
+								<img class="etalage_thumb_image" src="../../public/images/8.jpg" />
+								<img class="etalage_source_image" src="../../public/images/8.jpg" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="../../images/9.jpg" />
-								<img class="etalage_source_image" src="../../images/9.jpg" />
+								<img class="etalage_thumb_image" src="../../public/images/9.jpg" />
+								<img class="etalage_source_image" src="../../public/images/9.jpg" />
 							</li>
 						</ul>
 					    </div>
@@ -97,7 +70,7 @@
 							  </form>
 							</div>
 							<ul class="add-to-links">
-    			              <li><img src="../../images/wish.png" alt=""><a href="#">Add to wishlist</a></li>
+    			              <li><img src="../../public/images/wish.png" alt=""><a href="#">Add to wishlist</a></li>
     			            </ul>
 							<div class="social_buttons">
 								<h4>95 Items</h4>
@@ -144,7 +117,7 @@
 			<div class="row">
 				<h4 class="m_11">Related Products in the same Category</h4>
 				<div class="col-md-4 product1">
-					<img src="../../images/s1.jpg" class="img-responsive" alt=""/>
+					<img src="../../public/images/s1.jpg" class="img-responsive" alt=""/>
 					<div class="shop_desc"><a href="single.php">
 						</a><h3><a href="single.php"></a><a href="#">aliquam volutp</a></h3>
 						<p>Lorem ipsum consectetuer adipiscing </p>
@@ -158,7 +131,7 @@
 				    </div>
 				</div>
 				<div class="col-md-4 product1">
-					<img src="../../images/s2.jpg" class="img-responsive" alt=""/>
+					<img src="../../public/images/s2.jpg" class="img-responsive" alt=""/>
 					<div class="shop_desc"><a href="single.php">
 						</a><h3><a href="single.php"></a><a href="#">aliquam volutp</a></h3>
 						<p>Lorem ipsum consectetuer adipiscing </p>
@@ -172,7 +145,7 @@
 				    </div>
 				</div>
 				<div class="col-md-4">
-					<img src="../../images/s3.jpg" class="img-responsive" alt=""/>
+					<img src="../../public/images/s3.jpg" class="img-responsive" alt=""/>
 					<div class="shop_desc"><a href="single.php">
 						</a><h3><a href="single.php"></a><a href="#">aliquam volutp</a></h3>
 						<p>Lorem ipsum consectetuer adipiscing </p>
@@ -190,7 +163,5 @@
 	   </div>
 	  </div>
 
-    <?php include __DIR__ . '/partials/fin-doc.part.php'; ?>
+<?php include __DIR__ . '/partials/fin-doc.part.php'; ?>
 
-</body>	
-</html>

@@ -1,8 +1,4 @@
-<?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
 
- </head>
-<body>
-    <?php include __DIR__ . '/partials/header.part.php'; ?>
 
      <div class="main">
       <div class="shop_top">
@@ -13,7 +9,4 @@
 	   </div>
 	  </div>
 
-    <?php include __DIR__ . '/partials/fin-doc.part.php'; ?>
 
-</body>	
-</html>

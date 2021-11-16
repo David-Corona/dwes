@@ -1,16 +1,4 @@
 <?php
-/*require_once 'utils/Utils.php';
-require_once 'exceptions/FileException.php';
-require_once 'exceptions/QueryException.php';
-require_once 'exceptions/AppException.php';
-require_once 'utils/File.php';
-require_once 'entity/Producto.php';
-require_once 'entity/Categoria.php';
-require_once 'repository/ProductoRepository.php';
-require_once 'repository/CategoriaRepository.php';
-require_once 'database/Connection.php';
-require_once 'database/QueryBuilder.php';
-require_once 'core/App.php';*/
 
 use cursophp7dc\app\exceptions\AppException;
 use cursophp7dc\app\exceptions\QueryException;
@@ -29,7 +17,7 @@ $precio = '';
 
 try {
 
-    //podría simplificarse, pero uso variable en el view
+    //podría simplificarse, pero uso $prodRepository en el view
     $prodRepository = App::getRepository(ProductoRepository::class);
     $categoriaRepository = App::getRepository(CategoriaRepository::class);
 

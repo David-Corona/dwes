@@ -21,9 +21,9 @@ return [
     'routes' => [
         'filename' => 'routes.php'
     ],
-    /*'project' => [
+    'project' => [
         'namespace' => 'cursophp7dc'
-    ],*/
+    ],
     'swiftmail' => [
         'smtp_server' => 'smtp.gmail.com',
         'smtp_port' => '587',

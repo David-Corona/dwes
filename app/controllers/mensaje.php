@@ -8,7 +8,6 @@ use cursophp7dc\app\repository\MensajeRepository;
 use cursophp7dc\core\App;
 
 
-
 try {
 
         $nombre = trim(htmlspecialchars($_POST['nombre']));
@@ -59,6 +58,10 @@ catch (ValidationException $validationException)
 catch (AppException $appException)
 {
     die($appException->getMessage());
+}
+catch (QueryException $queryException)
+{
+    die($queryException->getMessage());
 }
 
 try {

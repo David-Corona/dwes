@@ -1,8 +1,6 @@
 <?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
 
- </head>
-<body>
-    <?php include __DIR__ . '/partials/header.part.php'; ?>
+<?php include __DIR__ . '/partials/header.part.php'; ?>
 
      <div class="main">
       <div class="shop_top">
@@ -34,13 +32,13 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>-->
                             <?php if(empty($errores)) : ?>
-                                <p><?= $GLOBALS['mensajeOk'] ?></p>
+                                <p><?= $mensajeOk ?></p>
                                 <ul>
-                                    <li>Nombre: <?= $GLOBALS['nombre'] ?></li>
-                                    <li>Apellidos: <?= $GLOBALS['apellidos'] ?></li>
-                                    <li>Email: <?= $GLOBALS['email'] ?></li>
-                                    <li>Asunto: <?= $GLOBALS['asunto'] ?></li>
-                                    <li>Mensaje: <?= $GLOBALS['texto'] ?></li>
+                                    <li>Nombre: <?= $nombre ?></li>
+                                    <li>Apellidos: <?= $apellidos ?></li>
+                                    <li>Email: <?= $email ?></li>
+                                    <li>Asunto: <?= $asunto ?></li>
+                                    <li>Mensaje: <?= $texto ?></li>
                                 </ul>
                             <?php else : ?>
                                 <ul>
@@ -54,17 +52,17 @@
                     <form method="post" action="/mensaje" >
                         <div class="left-contact">
                             <p><label for="nombre">(*) Nombre</label>
-                           <input type="text" class="text" name="nombre" value="<?= $GLOBALS['nombre'] ?>" required></p>
+                           <input type="text" class="text" name="nombre" value="<?= $nombre ?>" required></p>
                             <p><label for="nombre">Apellidos</label>
-                           <input type="text" class="text" name="apellidos" value="<?= $GLOBALS['apellidos'] ?>" ></p>
+                           <input type="text" class="text" name="apellidos" value="<?= $apellidos ?>" ></p>
                             <p><label for="nombre">(*) Email</label>
-                           <input type="text" class="text" name="email" value="<?= $GLOBALS['email'] ?>" required></p>
+                           <input type="text" class="text" name="email" value="<?= $email ?>" required></p>
                        </div>
                        <div class="right-contact">
                            <p><label for="nombre">(*) Asunto</label>
-                           <input type="text" class="text" name="asunto" value="<?= $GLOBALS['asunto'] ?>" required></p>
+                           <input type="text" class="text" name="asunto" value="<?= $asunto ?>" required></p>
                            <p><label for="nombre">Mensaje</label>
-                           <textarea name="texto" ><?= $GLOBALS['texto'] ?></textarea></p>
+                           <textarea name="texto" ><?= $texto ?></textarea></p>
 
                            <button class="">ENVIAR</button>
 
@@ -81,7 +79,4 @@
 	   </div>
 	  </div>
 
-    <?php include __DIR__ . '/partials/fin-doc.part.php'; ?>
-
-</body>	
-</html>
+<?php include __DIR__ . '/partials/fin-doc.part.php'; ?>

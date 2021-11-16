@@ -20,8 +20,10 @@ class App
     }
 
     //devolver un elemento del array a partir de la clave que se le pase
+
     /**
      * @param string $key
+     * @return mixed
      * @throws AppException
      */
     public static function get(string $key)

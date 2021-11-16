@@ -1,8 +1,7 @@
 
 <div class="row">
 
-
-    <?php foreach ($GLOBALS['productos'] as $producto): ?>
+    <?php foreach ($productos as $producto): ?>
 
         <div class="col-md-3 shop_box"><a href="single.php">
                 <img src=<?= $producto->getNombreImagen()?> class="img-responsive" alt="<?= $producto->getTitulo()?>" />
