@@ -6,9 +6,9 @@
                 <h1>Imagen producto</h1>
                 <hr>
                 <div class="clear">
-                    <img src="<?= $producto->getNombreImagen() ?>"
-                         alt="<?= $producto->getNombreImagen() ?>"
-                         title="<?= $producto->getTitulo() ?>"
+                    <img src="/<?= $producto->getNombreImagen() ?>"
+                         alt="/<?= $producto->getNombreImagen() ?>"
+                         title="/<?= $producto->getTitulo() ?>"
                     >
                 </div>
             </div>

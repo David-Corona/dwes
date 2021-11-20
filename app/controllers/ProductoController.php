@@ -5,6 +5,7 @@ namespace cursophp7dc\app\controllers;
 use cursophp7dc\app\entity\Producto;
 use cursophp7dc\app\exceptions\AppException;
 use cursophp7dc\app\exceptions\FileException;
+use cursophp7dc\app\exceptions\NotFoundException;
 use cursophp7dc\app\exceptions\QueryException;
 use cursophp7dc\app\exceptions\ValidationException;
 use cursophp7dc\app\repository\CategoriaRepository;
@@ -101,12 +102,13 @@ class ProductoController
     }
 
     /**
-     * @param $id
-     * @throws AppException
+     * @param int $id
+     * @throws NotFoundException
+     * @throws QueryException
      */
-    public function show($id)
+    public function show(int $id)
     {
-        $producto = App::get(ProductoRepository::class)->find($id);
+        $producto = App::getRepository(ProductoRepository::class)->find($id);
 
         Response::renderView('show-producto', 'layout', compact('producto'));
     }

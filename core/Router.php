@@ -49,29 +49,39 @@ class Router
     /**
      * @param string $controller
      * @param string $action
-     * @throws NotFoundException
+     * @param array $parameters
+     * @return bool
      * @throws AppException
+     * @throws NotFoundException
      */
-    private function callAction(string $controller, string $action):void
+    private function callAction(string $controller, string $action, array $parameters):bool
     {
-        $controller = App::get('config')['project']['namespace'] . '\\app\\controllers\\' . $controller;
+        try {
+            $controller = App::get('config')['project']['namespace'] . '\\app\\controllers\\' . $controller;
+            $objController = new $controller();
 
-        $objController = new $controller();
+            if (! method_exists($objController, $action))
+                throw new NotFoundException("El controlador  $controller no responde al action $action");
 
-        if (! method_exists($objController, $action))
-            throw new NotFoundException("El controlador  $controller no responde al action $action");
+            call_user_func_array(array($objController, $action), $parameters);
 
-        $objController->$action();
+            return true;
+        }
+        catch (\TypeError $typeError)
+        {
+            return false;
+        }
+
     }
 
-    /**
+    /* ****
      * @param string $uri
      * @param string $method
      * @return void
      * @throws NotFoundException
      * @throws AppException
      */
-    public function direct(string $uri, string $method): void
+    /*public function direct(string $uri, string $method): void
     {
         if (!array_key_exists($uri, $this->routes[$method]))
             throw new NotFoundException('No se ha definido una ruta para la uri solicitada.');
@@ -79,6 +89,62 @@ class Router
         list($controller, $action) = explode('@', $this->routes[$method][$uri]);
 
         $this->callAction($controller, $action);
+    }*/
+    /**
+     * @param string $uri
+     * @param string $method
+     * @throws AppException
+     * @throws NotFoundException
+     */
+    public function direct(string $uri, string $method): void
+    {
+        foreach ($this->routes[$method] as $route=>$controller)
+        {
+            $urlRule = $this->prepareRoute($route);
+
+            if (preg_match($urlRule, $uri, $matches) === 1)
+            {
+                $parameters = $this->getParametersRoute($route, $matches);
+
+                list($controller, $action) = explode ('@', $controller);
+
+                if ($this->callAction($controller, $action, $parameters) === true)
+                    return;
+            }
+        }
+
+        throw new NotFoundException('No se ha definido una ruta para esta URI.');
+    }
+
+    /**
+     * @param string $route
+     * @return string
+     */
+    private function prepareRoute(string $route): string
+    {
+        $urlRule = preg_replace(
+            '/:([^\/]+)/',
+            '(?<\1>[^/]+)',
+            $route
+        );
+
+        $urlRule = str_replace('/', '\/', $urlRule);
+
+        return '/^' . $urlRule . '\/*$/s';
+    }
+
+    /**
+     * @param string $route
+     * @param array $matches
+     * @return array
+     */
+    private function getParametersRoute(string $route, array $matches)
+    {
+        preg_match_all('/:([^\/]+)/', $route, $parameterNames);
+
+        $parameterNames = array_flip($parameterNames[1]);
+
+        return array_intersect_key($matches, $parameterNames);
     }
 
     public function redirect(string $path)
