@@ -1,6 +1,3 @@
-<?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
-
-<?php include __DIR__ . '/partials/header.part.php'; ?>
 
     <div class="main">
         <div class="shop_top">
@@ -9,9 +6,8 @@
                     <h1>Alta nuevo producto</h1>
                     <hr>
 
-
                     <div>
-                        <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') : ?>
+                        <?php if (!empty($mensaje) || !empty($errores)) : ?>
                             <div class="alert alert-<?= empty($errores) ? 'success' : 'danger'; ?> alert-dismissible" role="alert">
                                 <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -43,7 +39,10 @@
                                 <p><label for="categoria">(*) Categoría</label>
                                     <select name="categoria">
                                         <?php foreach ($categorias as $categoria) : ?>
-                                            <option value="<?= $categoria->getId() ?>"><?= $categoria->getNombre() ?></option>
+                                            <option value="<?= $categoria->getId() ?>"
+                                                <?= ($categoriaSeleccionada == $categoria->getId()) ? 'selected' : '' ?>
+                                            ><?= $categoria->getNombre() ?>
+                                            </option>
                                         <?php endforeach; ?>
                                     </select>
 
@@ -92,7 +91,7 @@
                                     <td><?= $producto->getTitulo() ?></td>
                                     <td><?= $producto->getSubtitulo() ?></td>
                                     <td><?= $producto->getDescripcion() ?></td>
-                                    <td><?= $prodRepository->getCategoria($producto)->getNombre() ?></td>
+                                    <td><?= $producto->getCategoria() ?></td>
                                     <td><?= $producto->getPrecio() ?></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -107,5 +106,4 @@
         </div>
     </div>
 
-<?php include __DIR__ . '/partials/fin-doc.part.php'; ?>
 

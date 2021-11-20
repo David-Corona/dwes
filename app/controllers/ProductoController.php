@@ -12,6 +12,7 @@ use cursophp7dc\app\repository\CategoriaRepository;
 use cursophp7dc\app\repository\ProductoRepository;
 use cursophp7dc\app\utils\File;
 use cursophp7dc\core\App;
+use cursophp7dc\core\helpers\FlashMessage;
 use cursophp7dc\core\Response;
 
 class ProductoController
@@ -21,17 +22,25 @@ class ProductoController
      */
     public function index()
     {
-        $prodRepository = App::getRepository(ProductoRepository::class);
+        /*$prodRepository = App::getRepository(ProductoRepository::class);
         $categoriaRepository = App::getRepository(CategoriaRepository::class);
         $productos = $prodRepository->findAll();
-        $categorias = $categoriaRepository->findAll();
-        //$productos = App::getRepository(ProductoRepository::class)->findAll();
-        //$categorias = App::getRepository(CategoriaRepository::class)->findAll();
-        //se solucionará más adelante
-        $errores = [];
-        $mensaje = '';
+        $categorias = $categoriaRepository->findAll();*/
+        $productos = App::getRepository(ProductoRepository::class)->findAll();
+        $categorias = App::getRepository(CategoriaRepository::class)->findAll();
 
-        Response::renderView('productos', 'layout', compact('productos', 'categorias'));
+        $errores = FlashMessage::get('errores', []);
+        $mensaje = FlashMessage::get('mensaje');
+        $titulo = FlashMessage::get('titulo');
+        $subtitulo = FlashMessage::get('subtitulo');
+        $descripcion = FlashMessage::get('descripcion');
+        $categoriaSeleccionada = FlashMessage::get('categoriaSeleccionada');
+        $precio = FlashMessage::get('precio');
+
+        //compact => se pasan las variables a la vista
+        Response::renderView('productos', 'layout',
+            compact('productos', 'categorias', 'errores', 'mensaje', 'titulo',
+                'subtitulo', 'descripcion', 'categoriaSeleccionada', 'precio'));
     }
 
     /**
@@ -42,12 +51,19 @@ class ProductoController
     {
         try {
             $titulo = trim(htmlspecialchars($_POST['titulo']));
+            FlashMessage::set('titulo', $titulo);
             $subtitulo = trim(htmlspecialchars($_POST['subtitulo']));
+            FlashMessage::set('subtitulo', $subtitulo);
             $descripcion = trim(htmlspecialchars($_POST['descripcion']));
+            FlashMessage::set('descripcion', $descripcion);
             $categoria = (int)$_POST['categoria'];
+            if (empty($categoria))
+                throw new ValidationException('No se ha recibido la categoría.');
+            FlashMessage::set('categoriaSeleccionada', $categoria);
             $precio = (float)$_POST['precio'];
-            /*if (empty($categoria))
-                throw new ValidationException('No se ha recibido la categoría.');*/
+            FlashMessage::set('precio', $precio);
+
+
 
             $tiposAceptados = ['image/jpeg', 'image/png', 'image/gif'];
             $imagen = new File('imagen', $tiposAceptados); //imagen es el name del input file
@@ -57,8 +73,7 @@ class ProductoController
             $imagen->resizeFile(Producto::RUTA_IMAGENES_PRODUCTO, Producto::RUTA_IMAGENES_SHOP);
 
             $productoTienda = new Producto($titulo, $subtitulo, $descripcion, $categoria, $precio, $imagen->getFileName());
-            //$prodRepository->save($productoTienda);
-            //$prodRepository = new ProductoRepository();
+
             $prodRepository = App::getRepository(ProductoRepository::class);
 
             $prodRepository->save($productoTienda);
@@ -68,6 +83,14 @@ class ProductoController
             $message = "Se ha guardado un nuevo producto: " . $productoTienda->getTitulo();
             App::get('logger')->add($message);
 
+            FlashMessage::set('mensaje', $message);
+
+            //Al crearse correctamente, se limpia el form
+            FlashMessage::unset('titulo');
+            FlashMessage::unset('subtitulo');
+            FlashMessage::unset('descripcion');
+            FlashMessage::unset('categoriaSeleccionada');
+            FlashMessage::unset('precio');
 
 
             /*if (empty($titulo)) {
@@ -91,11 +114,11 @@ class ProductoController
         }
         catch (FileException $fileException)
         {
-            die($fileException->getMessage());
+            FlashMessage::set('errores', [ $fileException->getMessage() ]);
         }
         catch (ValidationException $validationException)
         {
-            die($validationException->getMessage());
+            FlashMessage::set('errores', [ $validationException->getMessage() ]);
         }
 
         App::get('router')->redirect('productos');

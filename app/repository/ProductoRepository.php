@@ -33,7 +33,6 @@ class ProductoRepository extends QueryBuilder
     }
 
     //incrementar número de producto en categoría y guardar producto
-
     /**
      * @param Producto $imagenProducto
      * @throws QueryException

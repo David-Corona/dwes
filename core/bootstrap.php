@@ -5,6 +5,8 @@ use cursophp7dc\app\utils\MyMail;
 use cursophp7dc\core\App;
 use cursophp7dc\core\Router;
 
+session_start();
+
 require __DIR__ . '/../vendor/autoload.php';
 
 $config = require_once __DIR__ . '/../app/config.php';
