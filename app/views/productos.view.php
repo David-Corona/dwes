@@ -32,13 +32,13 @@
 
 
                                 <p><label for="titulo">(*) Título</label>
-                                    <input type="text" class="text" name="titulo" value="<?= $titulo ?>" required></p>
+                                    <input type="text" class="text" name="titulo" value="<?= $titulo ?? '' ?>" required></p>
 
                                 <p><label for="subtitulo">(*) Subtítulo</label>
-                                    <input type="text" class="text" name="subtitulo" value="<?= $subtitulo ?>" required></p>
+                                    <input type="text" class="text" name="subtitulo" value="<?= $subtitulo ?? '' ?>" required></p>
 
                                 <p><label for="descripcion">Descripción</label>
-                                    <textarea name="descripcion" rows="5" cols="40" ><?= $descripcion ?></textarea></p>
+                                    <textarea name="descripcion" rows="5" cols="40" ><?= $descripcion ?? '' ?></textarea></p>
 
                                 <p><label for="categoria">(*) Categoría</label>
                                     <select name="categoria">
@@ -48,7 +48,7 @@
                                     </select>
 
                                 <p><label for="precio">(*) Precio</label>
-                                    <input type="number" name="precio" min="0.00" max="1000" step="0.01" value="<?= $precio ?>" required></p>
+                                    <input type="number" name="precio" min="0.00" max="1000" step="0.01" value="<?= $precio ?? '' ?>" required></p>
 
                                 <p><label for="imagen">Imagen</label>
                                     <input type="file" class="form-control" name="imagen" ></p>

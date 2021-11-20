@@ -1,6 +1,3 @@
-<?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
-
-<?php include __DIR__ . '/partials/header.part.php'; ?>
 
      <div class="main">
       <div class="shop_top">
@@ -52,17 +49,17 @@
                     <form method="post" action="/mensaje" >
                         <div class="left-contact">
                             <p><label for="nombre">(*) Nombre</label>
-                           <input type="text" class="text" name="nombre" value="<?= $nombre ?>" required></p>
+                           <input type="text" class="text" name="nombre" value="<?= $nombre ?? '' ?>" required></p>
                             <p><label for="nombre">Apellidos</label>
-                           <input type="text" class="text" name="apellidos" value="<?= $apellidos ?>" ></p>
+                           <input type="text" class="text" name="apellidos" value="<?= $apellidos ?? '' ?>" ></p>
                             <p><label for="nombre">(*) Email</label>
-                           <input type="text" class="text" name="email" value="<?= $email ?>" required></p>
+                           <input type="text" class="text" name="email" value="<?= $email ?? '' ?>" required></p>
                        </div>
                        <div class="right-contact">
                            <p><label for="nombre">(*) Asunto</label>
-                           <input type="text" class="text" name="asunto" value="<?= $asunto ?>" required></p>
+                           <input type="text" class="text" name="asunto" value="<?= $asunto ?? '' ?>" required></p>
                            <p><label for="nombre">Mensaje</label>
-                           <textarea name="texto" ><?= $texto ?></textarea></p>
+                           <textarea name="texto" ><?= $texto ?? '' ?></textarea></p>
 
                            <button class="">ENVIAR</button>
 
@@ -79,4 +76,3 @@
 	   </div>
 	  </div>
 
-<?php include __DIR__ . '/partials/fin-doc.part.php'; ?>
