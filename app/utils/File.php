@@ -53,7 +53,6 @@ class File
     }
 
     //moverá el fichero subido a la ruta de destino
-
     /**
      * @throws FileException
      */
@@ -109,6 +108,11 @@ class File
         }
     }
 
+    /**
+     * @param string $rutaOrigen
+     * @param string $rutaDestino
+     * @throws FileException
+     */
     public function resizeFile(string $rutaOrigen, string $rutaDestino)
     {
         $origen = $rutaOrigen . $this->fileName;

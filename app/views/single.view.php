@@ -1,6 +1,20 @@
+
+
+
+
+<!-- No incorporado - Vista de la plantilla de los detalles del producto -->
+
+
+
+
+
+
+
+
 <?php include __DIR__ . '/partials/inicio-doc.part.php'; ?>
 
 <?php include __DIR__ . '/partials/header.part.php'; ?>
+
 
      <div class="main">
       <div class="shop_top">

@@ -68,14 +68,14 @@
                                 <tr>
                                     <th scope="row"><?= $producto->getId() ?></th>
                                     <td>
-                                        <img src="<?= $producto->getNombreImagen() ?>"
-                                             alt="<?= $producto->getNombreImagen() ?>"
+                                        <img src="<?= $producto->getUrlImagenMini() ?>"
+                                             alt="<?= $producto->getUrlImagenMini() ?>"
                                              title="<?= $producto->getTitulo() ?>"
                                     </td>
                                     <td><?= $producto->getTitulo() ?></td>
                                     <td><?= $producto->getSubtitulo() ?></td>
                                     <td><?= $producto->getDescripcion() ?></td>
-                                    <td><?= $producto->getCategoria() ?></td>
+                                    <td><?= $prodRepository->getCategoria($producto)->getNombre() ?></td>
                                     <td><?= $producto->getPrecio() ?></td>
                                 </tr>
                             <?php endforeach; ?>

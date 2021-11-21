@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="header-left">
                     <div class="logo">
-                        <a href="/"><img src="../images/logo.png" alt=""/></a>
+                        <a href="/"><img src="../images/logopadel.png" alt=""/></a>
                     </div>
                     <div class="menu">
                         <a class="toggleMenu" href="#"><img src="../images/nav.png" alt="" /></a>
@@ -26,7 +26,7 @@
                             </li>
                             <?php else: ?>
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? 'current' : '' ?>" >
-                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? '#' : '/productos' ?>">Productos</a>
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? '/productos' : '/productos' ?>">Productos</a>
                             </li>
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('logout') ? 'current' : '' ?>">
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('logout') ? '#' : '/logout' ?>">Logout (<?= $app['user']->getUsername() ?>)</a>
@@ -47,7 +47,7 @@
                     <div class="search-box">
                         <div id="sb-search" class="sb-search">
                             <form>
-                                <input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search">
+                                <input class="sb-search-input" placeholder="Buscar..." type="search" name="search" id="search">
                                 <input class="sb-search-submit" type="submit" value="">
                                 <span class="sb-icon-search"> </span>
                             </form>
@@ -67,9 +67,9 @@
                                     <a href="#"><img src="../images/close_edit.png" alt=""/></a>
                                 </div>
                                 <div class="clear"></div>
-                                <li class="list_img"><img src="../images/1.jpg" alt=""/></li>
-                                <li class="list_desc"><h4><a href="#">velit esse molestie</a></h4><span class="actual">1 x
-                          $12.00</span></li>
+                                <li class="list_img"><img src="../images/palapadel.png" alt="Imagen Producto"/></li>
+                                <li class="list_desc"><h4><a href="#">Producto Pádel</a></h4><span class="actual">1 x
+                          90.00€</span></li>
                                 <div class="login_buttons">
                                     <div class="check_button"><a href="/checkout">Check out</a></div>
                                     <div class="login_button"><a href="/login">Login</a></div>

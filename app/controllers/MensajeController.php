@@ -12,10 +12,11 @@ use cursophp7dc\core\Response;
 
 class MensajeController
 {
-
+    /**
+     * @throws AppException
+     */
     public function index()
     {
-        //$mensajeRepository = App::getRepository(MensajeRepository::class);
         Response::renderView('contact');
     }
 
@@ -26,6 +27,7 @@ class MensajeController
     public function mensaje()
     {
         try {
+
             $nombre = trim(htmlspecialchars($_POST['nombre']));
             $apellidos = trim(htmlspecialchars($_POST['apellidos']));
             $email = trim(htmlspecialchars($_POST['email']));
@@ -49,7 +51,6 @@ class MensajeController
                 $mensaje = new Mensaje($nombre, $apellidos, $asunto, $email, $texto);
 
                 App::getRepository(MensajeRepository::class)->save($mensaje);
-                //$prodRepository->guarda($productoTienda);
 
                 //Log
                 $message = "Se ha guardado un nuevo mensaje: " . $mensaje->getTexto();

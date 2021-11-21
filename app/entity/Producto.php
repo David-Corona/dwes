@@ -182,6 +182,11 @@ class Producto implements IEntity
 
     public function getUrlImagen() : string
     {
+        return self::RUTA_IMAGENES_PRODUCTO . $this->getNombreImagen();
+    }
+
+    public function getUrlImagenMini() : string
+    {
         return self::RUTA_IMAGENES_SHOP . $this->getNombreImagen();
     }
 
@@ -197,7 +202,7 @@ class Producto implements IEntity
             'descripcion' => $this->getDescripcion(),
             'categoria' => $this->getCategoria(),
             'precio' => $this->getPrecio(),
-            'nombreImagen' => $this->getUrlImagen()
+            'nombreImagen' => $this->getNombreImagen()
         ];
     }
 }

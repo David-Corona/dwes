@@ -22,11 +22,8 @@ class ProductoController
      */
     public function index()
     {
-        /*$prodRepository = App::getRepository(ProductoRepository::class);
-        $categoriaRepository = App::getRepository(CategoriaRepository::class);
+        $prodRepository = App::getRepository(ProductoRepository::class);
         $productos = $prodRepository->findAll();
-        $categorias = $categoriaRepository->findAll();*/
-        $productos = App::getRepository(ProductoRepository::class)->findAll();
         $categorias = App::getRepository(CategoriaRepository::class)->findAll();
 
         $errores = FlashMessage::get('errores', []);
@@ -39,7 +36,7 @@ class ProductoController
 
         //compact => se pasan las variables a la vista
         Response::renderView('productos', 'layout',
-            compact('productos', 'categorias', 'errores', 'mensaje', 'titulo',
+            compact('productos', 'categorias', 'prodRepository', 'errores', 'mensaje', 'titulo',
                 'subtitulo', 'descripcion', 'categoriaSeleccionada', 'precio'));
     }
 
@@ -64,15 +61,15 @@ class ProductoController
             FlashMessage::set('precio', $precio);
 
 
-
             $tiposAceptados = ['image/jpeg', 'image/png', 'image/gif'];
             $imagen = new File('imagen', $tiposAceptados); //imagen es el name del input file
 
             $imagen->saveUploadFile(Producto::RUTA_IMAGENES_PRODUCTO);
             //$imagen->copyFile(Producto::RUTA_IMAGENES_SHOP, Producto::RUTA_IMAGENES_PRODUCTO);
-            $imagen->resizeFile(Producto::RUTA_IMAGENES_PRODUCTO, Producto::RUTA_IMAGENES_SHOP);
 
             $productoTienda = new Producto($titulo, $subtitulo, $descripcion, $categoria, $precio, $imagen->getFileName());
+
+            $imagen->resizeFile(Producto::RUTA_IMAGENES_PRODUCTO, Producto::RUTA_IMAGENES_SHOP);
 
             $prodRepository = App::getRepository(ProductoRepository::class);
 

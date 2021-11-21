@@ -56,7 +56,6 @@ class AuthController
             FlashMessage::set('login-error', [$validationException->getMessage()]);
             App::get('router')->redirect('login');
         }
-
     }
 
     /**

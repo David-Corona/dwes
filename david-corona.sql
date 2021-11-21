@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-10-2021 a las 16:37:23
+-- Tiempo de generación: 21-11-2021 a las 19:10:04
 -- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.10
+-- Versión de PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -63,7 +63,8 @@ CREATE TABLE `mensajes` (
 --
 
 INSERT INTO `mensajes` (`id`, `nombre`, `apellidos`, `asunto`, `email`, `texto`, `fecha`) VALUES
-(3, 'David', 'Corona', 'Asunto importante', 'corona@hotmail.com', 'Texto cualquiera', '2021-10-22 16:17:53');
+(3, 'David', 'Corona', 'Asunto importante', 'corona@hotmail.com', 'Texto cualquiera', '2021-10-22 16:17:53'),
+(5, 'Nombre66', 'Apellidos66', 'Asunto66', 'testeo.davidcorona@gmail.com', 'Mensaje66', '2021-11-20 02:23:16');
 
 -- --------------------------------------------------------
 
@@ -86,8 +87,29 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `titulo`, `subtitulo`, `descripcion`, `precio`, `nombreImagen`, `categoria`) VALUES
-(1, 'BULLPADEL VERTEX 03 21', 'La joya de Maxi Sánchez', 'Descripción de la BULLPADEL VERTEX 03 21', '274.95', 'images/shop/BP_Vertex.jpg', 1),
-(2, 'BULLPADEL VERTEX HYBRID FLY KAKI', 'Seguridad en cada pisada', 'Descripción detallada de BULLPADEL VERTEX HYBRID FLY KAKI', '89.96', 'images/shop/BP_Vertex_Hyb.jpg', 2);
+(16, 'Bullpadel Vertex Hybrid Fly', 'Seguridad en cada pisada', 'Descripción detallada de las zapatillas de pádel Bullpadel Vertex Hybrid Fly...', '89.00', 'BP_Vertex_Hyb.jpg', 2),
+(17, 'Bullpadel Vertex 03 21', 'La joya de Maxi Sánchez', 'Una extensa descripción de la pala Bullpadel Vertex 03 21...', '249.99', 'BP_Vertex.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `username`, `password`, `role`) VALUES
+(4, 'dwes', '$2y$10$Ib5OeqICd4cDwmgySt2.BudBz40sN4PYweoCwCt86B0FAaoMmqQtG', 'ROLE_USER'),
+(5, 'admin', '$2y$10$xGvouzZIl0MO3Q2xA8Q3tePWtP7EJ9ZnXvO6TgEdzhL99E3vz3WDG', 'ROLE_ADMIN');
 
 --
 -- Índices para tablas volcadas
@@ -114,6 +136,13 @@ ALTER TABLE `productos`
   ADD KEY `FK_CATEGORIA_PRODUCTO` (`categoria`);
 
 --
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE_USERNAME` (`username`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -127,13 +156,19 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
