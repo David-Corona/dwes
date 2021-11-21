@@ -7,22 +7,9 @@
                     <hr>
 
                     <div>
-                        <?php if (!empty($mensaje) || !empty($errores)) : ?>
-                            <div class="alert alert-<?= empty($errores) ? 'success' : 'danger'; ?> alert-dismissible" role="alert">
-                                <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>-->
-                                <?php if(empty($errores)) : ?>
-                                    <p><?= $mensaje ?></p>
-                                <?php else : ?>
-                                    <ul>
-                                        <?php foreach($errores as $error) : ?>
-                                            <li><?= $error ?></li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                <?php endif; ?>
-                            </div>
-                        <?php endif; ?>
+
+                        <?php include __DIR__ . '/partials/show-error.part.php' ?>
+
                         <form method="post" action="/productos/nuevo" enctype="multipart/form-data">
                             <div class="">
 
@@ -54,12 +41,9 @@
 
                                 <button class="">ENVIAR</button>
 
-
                                 <!--<div class="form-submit">
                                     <input name="submit" type="submit" id="submit" value="Submit"><br>
                                 </div>-->
-
-
 
                             </div>
                             <div class="clear">Los campos marcados con (*) son obligatorios.</div>

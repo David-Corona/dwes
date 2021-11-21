@@ -1,5 +1,6 @@
 <?php
 
+use cursophp7dc\app\repository\UsuarioRepository;
 use cursophp7dc\app\utils\MyLog;
 use cursophp7dc\app\utils\MyMail;
 use cursophp7dc\core\App;
@@ -22,3 +23,11 @@ App::bind('logger', $logger);
 
 $mailer = new MyMail();
 App::bind('mailer', $mailer);
+
+//obtenemos el usuario logueado y se guarda para poder obtenerlo con un get
+if (isset($_SESSION['loguedUser']))
+    $appUser = App::getRepository(UsuarioRepository::class)->find($_SESSION['loguedUser']);
+else
+    $appUser = null;
+
+App::bind('appUser', $appUser);

@@ -32,6 +32,12 @@ return [
         'password' => "Enero100190",
         'email' => 'testeo.davidcorona@gmail.com',
         'name' => 'Curso PHP 7'
-
+    ],
+    'security' => [
+        'roles' => [
+            'ROLE_ADMIN' => 3,
+            'ROLE_USER' => 2,
+            'ROLE_ANONYMOUS' => 1
+        ]
     ]
 ];

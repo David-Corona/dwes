@@ -16,7 +16,7 @@
 						   		<p>USA</p>
 				   		<p>Phone:(00) 222 666 444</p>
 				   		<p>Fax: (000) 000 00 00 0</p>
-				 	 	<p>Email: <span>support[at]snow.com</span></p>
+				 	 	<p>Email: <span>info[at]padelmarket.com</span></p>
 				   		<p>Follow on: <span>Facebook</span>, <span>Twitter</span></p>
 				   </div>
 				</div>

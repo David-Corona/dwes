@@ -2,6 +2,7 @@
 namespace cursophp7dc\core;
 
 use cursophp7dc\app\exceptions\AppException;
+use cursophp7dc\app\exceptions\AuthenticationException;
 use cursophp7dc\app\exceptions\NotFoundException;
 
 class Router
@@ -31,19 +32,27 @@ class Router
     /**
      * @param string $uri
      * @param string $controller
+     * @param string $role
      */
-    public function get(string $uri, string $controller):void
+    public function get(string $uri, string $controller, $role='ROLE_ANONYMOUS'):void
     {
-        $this->routes['GET'][$uri] = $controller;
+        $this->routes['GET'][$uri] = [
+            'controller' => $controller,
+            'role' => $role
+        ];
     }
 
     /**
      * @param string $uri
      * @param string $controller
+     * @param string $role
      */
-    public function post(string $uri, string $controller):void
+    public function post(string $uri, string $controller, $role='ROLE_ANONYMOUS'):void
     {
-        $this->routes['POST'][$uri] = $controller;
+        $this->routes['POST'][$uri] = [
+            'controller' => $controller,
+            'role' => $role
+        ];
     }
 
     /**
@@ -71,25 +80,8 @@ class Router
         {
             return false;
         }
-
     }
 
-    /* ****
-     * @param string $uri
-     * @param string $method
-     * @return void
-     * @throws NotFoundException
-     * @throws AppException
-     */
-    /*public function direct(string $uri, string $method): void
-    {
-        if (!array_key_exists($uri, $this->routes[$method]))
-            throw new NotFoundException('No se ha definido una ruta para la uri solicitada.');
-
-        list($controller, $action) = explode('@', $this->routes[$method][$uri]);
-
-        $this->callAction($controller, $action);
-    }*/
     /**
      * @param string $uri
      * @param string $method
@@ -98,18 +90,30 @@ class Router
      */
     public function direct(string $uri, string $method): void
     {
-        foreach ($this->routes[$method] as $route=>$controller)
+        foreach ($this->routes[$method] as $route=>$routeData)
         {
+            $controller = $routeData['controller'];
+            $minRole = $routeData['role'];
+
             $urlRule = $this->prepareRoute($route);
 
             if (preg_match($urlRule, $uri, $matches) === 1)
             {
-                $parameters = $this->getParametersRoute($route, $matches);
+                if (Security::isUserGranted($minRole) === false)
+                {
+                    if (!is_null(App::get('appUser')))
+                        throw new AuthenticationException('Acceso no autorizado.');
+                    else
+                        $this->redirect('login');
+                }
+                {
+                    $parameters = $this->getParametersRoute($route, $matches);
 
-                list($controller, $action) = explode ('@', $controller);
+                    list($controller, $action) = explode ('@', $controller);
 
-                if ($this->callAction($controller, $action, $parameters) === true)
-                    return;
+                    if ($this->callAction($controller, $action, $parameters) === true)
+                        return;
+                }
             }
         }
 
@@ -150,5 +154,7 @@ class Router
     public function redirect(string $path)
     {
         header('location: /' . $path);
+
+        exit();
     }
 }

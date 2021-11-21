@@ -37,13 +37,15 @@ abstract class QueryBuilder
 
     /**
      * @param string $sql
+     * @param array $parameters
      * @return array
      * @throws QueryException
      */
-    private function executeQuery(string $sql): array
+    private function executeQuery(string $sql, array $parameters = []): array
     {
         $pdoStatement = $this->connection->prepare($sql);
-        if ($pdoStatement->execute() === false)
+
+        if ($pdoStatement->execute($parameters) === false)
         {
             throw new QueryException("No se ha podido ejecutar la query solicitada");
         }
@@ -75,6 +77,36 @@ abstract class QueryBuilder
         if (empty($result))
             throw new NotFoundException("No se ha encontrado ningún elemento con id $id");
         return $result[0];
+    }
+
+    private function getFilters(array $filters)
+    {
+        if (empty($filters))
+            return '';
+
+        $strFilters = [];
+
+        foreach ($filters as $key=>$value)
+            $strFilters[] = $key . '=:' . $key;
+
+        return ' WHERE ' . implode(' and ', $strFilters);
+    }
+
+    public function findBy(array $filters):array
+    {
+        $sql = "SELECT * FROM $this->table " . $this->getFilters($filters);
+        return $this->executeQuery($sql, $filters);
+    }
+
+    //devuelve uno de los objetos que cumpla los filtros
+    public function findOneBy(array $filters):?IEntity
+    {
+        $result = $this->findBy($filters);
+
+        if (count($result) > 0)
+            return $result[0];
+
+        return null;
     }
 
     /**

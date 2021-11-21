@@ -13,15 +13,28 @@
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('index') ? 'current' : '' ?>" >
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('index') ? '#' : '/' ?>">Inicio</a>
                             </li>
-                            <!--<li class="<   ?= cursophp7dc\app\utils\Utils::opcionMenuActivaEnArray(['shop', 'single']) ? 'current' : '' ?>" >
-                                <a href="<   ?= cursophp7dc\app\utils\Utils::opcionMenuActiva('shop') ? '#' : '/shop' ?>">Shop</a>
-                            </li>-->
-                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? 'current' : '' ?>" >
-                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? '#' : '/productos' ?>">Productos</a>
-                            </li>
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? 'current' : '' ?>">
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? '#' : '/contact' ?>">Contacto</a>
                             </li>
+
+                            <?php if (is_null($app['user'])) : ?>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('login') ? 'current' : '' ?>">
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('login') ? '#' : '/login' ?>">Login</a>
+                            </li>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('registro') ? 'current' : '' ?>">
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('registro') ? '#' : '/registro' ?>">Registro</a>
+                            </li>
+                            <?php else: ?>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? 'current' : '' ?>" >
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? '#' : '/productos' ?>">Productos</a>
+                            </li>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('logout') ? 'current' : '' ?>">
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('logout') ? '#' : '/logout' ?>">Logout (<?= $app['user']->getUsername() ?>)</a>
+                            </li>
+                            <?php endif; ?>
+                            <!--<li class="<   ?= cursophp7dc\app\utils\Utils::opcionMenuActivaEnArray(['shop', 'single']) ? 'current' : '' ?>" >
+                                <a href="<   ?= cursophp7dc\app\utils\Utils::opcionMenuActiva('shop') ? '#' : '/shop' ?>">Shop</a>
+                            </li>-->
 
                             <div class="clear"></div>
                         </ul>
