@@ -21,31 +21,31 @@ class ProductoRepository extends QueryBuilder
     }
 
     /**
-     * @param Producto $imagenProducto
+     * @param Producto $producto
      * @return Categoria
      * @throws NotFoundException
      * @throws QueryException
      */
-    public function getCategoria(Producto $imagenProducto) : Categoria
+    public function getCategoria(Producto $producto) : Categoria
     {
         $categoriaRepository = new CategoriaRepository();
-        return $categoriaRepository->find($imagenProducto->getCategoria());
+        return $categoriaRepository->find($producto->getCategoria());
     }
 
     //incrementar número de producto en categoría y guardar producto
     /**
-     * @param Producto $imagenProducto
+     * @param Producto $producto
      * @throws QueryException
      */
-    public function guarda(Producto $imagenProducto)
+    public function guarda(Producto $producto)
     {
-        $fnGuardaProducto = function () use ($imagenProducto)
+        $fnGuardaProducto = function () use ($producto)
         {
-            $categoria = $this->getCategoria($imagenProducto);
+            $categoria = $this->getCategoria($producto);
             $categoriaRepository = new CategoriaRepository();
             $categoriaRepository->nuevoProducto($categoria);
 
-            $this->save($imagenProducto);
+            $this->save($producto);
         };
         $this->executeTransaction($fnGuardaProducto);
     }

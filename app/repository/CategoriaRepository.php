@@ -14,7 +14,6 @@ class CategoriaRepository extends QueryBuilder
     }
 
     //incrementar el numero de productos en categoria
-
     /**
      * @param Categoria $categoria
      * @throws QueryException

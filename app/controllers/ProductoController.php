@@ -73,8 +73,8 @@ class ProductoController
 
             $prodRepository = App::getRepository(ProductoRepository::class);
 
-            $prodRepository->save($productoTienda);
-            //$prodRepository->guarda($productoTienda);
+            //$prodRepository->save($productoTienda);
+            $prodRepository->guarda($productoTienda);
 
             //Log: cada vez que se cree un producto, se guarda en el log un mensaje
             $message = "Se ha guardado un nuevo producto: " . $productoTienda->getTitulo();
