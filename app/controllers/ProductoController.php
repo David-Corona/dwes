@@ -90,24 +90,6 @@ class ProductoController
             FlashMessage::unset('precio');
 
 
-            /*if (empty($titulo)) {
-                $errores[] = "El título no se puede quedar vacío.";
-            }
-            if (empty($subtitulo)) {
-                $errores[] = "El subtítulo no se puede quedar vacío.";
-            }
-            if (filter_var($precio, FILTER_VALIDATE_FLOAT) === false) {
-                $errores[] = "El precio debe ser un número.";
-            } elseif ($precio <= 0) {
-                $errores[] = "El precio debe ser un número positivo.";
-            }*/
-
-
-            /*if (empty($errores)) {
-                $mensaje = 'Producto creado correctamente.';
-            }*/
-
-
         }
         catch (FileException $fileException)
         {

@@ -15,3 +15,13 @@ $router->post('check-login', 'AuthController@checklogin');
 $router->get('logout', 'AuthController@logout', 'ROLE_USER');
 $router->get('registro', 'AuthController@registro');
 $router->post('check-registro', 'AuthController@checkRegistro');
+
+$router->get('articulos', 'ArticulosController@index', 'ROLE_USER');
+$router->post('articulos/nuevo', 'ArticulosController@nuevo', 'ROLE_USER');
+
+
+
+
+$router->get('trabajadores', 'TrabajadorController@index');
+$router->post('trabajadores/nuevo', 'TrabajadorController@nuevo', 'ROLE_USER');
+
