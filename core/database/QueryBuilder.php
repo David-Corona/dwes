@@ -92,10 +92,26 @@ abstract class QueryBuilder
         return ' WHERE ' . implode(' and ', $strFilters);
     }
 
+    /**
+     * @param array $filters
+     * @return array
+     * @throws QueryException
+     */
     public function findBy(array $filters):array
     {
         $sql = "SELECT * FROM $this->table " . $this->getFilters($filters);
         return $this->executeQuery($sql, $filters);
+    }
+
+    /**
+     * @param int $idUser
+     * @return array
+     * @throws QueryException
+     */
+    public function findAllUser(int $idUser) : array
+    {
+        $sql = "SELECT * from $this->table WHERE usuario=$idUser";
+        return $this->executeQuery($sql);
     }
 
     //devuelve uno de los objetos que cumpla los filtros

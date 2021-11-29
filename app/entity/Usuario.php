@@ -22,6 +22,11 @@ class Usuario implements IEntity
      * @var string
      */
     private $role;
+    /**
+     * @var int
+     */
+    private $numArticulos;
+
 
     /**
      * @return int|null
@@ -85,6 +90,24 @@ class Usuario implements IEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getNumArticulos(): int
+    {
+        return $this->numArticulos;
+    }
+
+    /**
+     * @param int $numArticulos
+     * @return Usuario
+     */
+    public function setNumArticulos(int $numArticulos): Usuario
+    {
+        $this->numArticulos = $numArticulos;
+        return $this;
+    }
+
 
     public function toArray(): array
     {
@@ -92,7 +115,8 @@ class Usuario implements IEntity
             'id' => $this->getId(),
             'username' => $this->getUsername(),
             'password' => $this->getPassword(),
-            'role' => $this->getRole()
+            'role' => $this->getRole(),
+            'numArticulos' => $this->getNumArticulos()
         ];
     }
 }

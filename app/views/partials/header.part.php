@@ -31,6 +31,9 @@
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('articulos') ? 'current' : '' ?>" >
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('articulos') ? '/articulos' : '/articulos' ?>">Artículos</a>
                             </li>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('perfil') ? 'current' : '' ?>" >
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('perfil') ? '/perfil' : '/perfil' ?>">Perfil</a>
+                            </li>
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('logout') ? 'current' : '' ?>">
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('logout') ? '#' : '/logout' ?>">Logout (<?= $app['user']->getUsername() ?>)</a>
                             </li>

@@ -63,7 +63,7 @@
                                      alt="<?= $articulo->getUrlImagen() ?>"
                                      title="<?= $articulo->getNombre() ?>"
                             </td>
-                            <td><?= $articulo->getUsuario() ?></td>
+                            <td><?= $artRepository->getUsuario($articulo)->getUsername() ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

@@ -21,7 +21,12 @@ class ArticulosController
      */
     public function index()
     {
-        $articulos = App::getRepository(ArticuloRepository::class)->findAll();
+        $artRepository = App::getRepository(ArticuloRepository::class);
+        if (App::get('appUser')->getRole() === "ROLE_ADMIN"){
+            $articulos = $artRepository->findAll();
+        } else {
+            $articulos = $artRepository->findAllUser(App::get('appUser')->getId());
+        }
 
         $errores = FlashMessage::get('errores', []);
         $mensaje = FlashMessage::get('mensaje');
@@ -30,8 +35,7 @@ class ArticulosController
         $fecha_caducidad = FlashMessage::get('fecha_caducidad');
 
         Response::renderView('articulos', 'layout',
-            compact('articulos', 'errores', 'mensaje', 'nombre', 'precio', 'fecha_caducidad'));
-
+            compact('articulos', 'artRepository', 'errores', 'mensaje', 'nombre', 'precio', 'fecha_caducidad'));
     }
 
     /**
@@ -53,11 +57,13 @@ class ArticulosController
 
             $imagen->saveUploadFile(Articulo::RUTA_FOTOS_ARTICULOS);
 
-            $articulo = new Articulo($nombre, $precio, $fecha_caducidad, $imagen->getFileName(), 'dwes');
+            $articulo = new Articulo($nombre, $precio, $fecha_caducidad, $imagen->getFileName(), App::get('appUser')->getId());
 
             //crea en bbdd
             $artRepository = App::getRepository(ArticuloRepository::class);
-            $artRepository->save($articulo);
+            //$artRepository->save($articulo);
+            $artRepository->guarda($articulo);
+
 
             //Log
             $message = "Se ha guardado un nuevo artículo: " . $articulo->getNombre();

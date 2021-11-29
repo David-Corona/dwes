@@ -31,7 +31,7 @@ class Articulo implements IEntity
      */
     private $imagen;
     /**
-     * @var string
+     * @var int
      */
     private $usuario;
 
@@ -40,9 +40,9 @@ class Articulo implements IEntity
      * @param float|int $precio
      * @param string $fecha_caducidad
      * @param string $imagen
-     * @param string $usuario
+     * @param int $usuario
      */
-    public function __construct(string $nombre='', float $precio=0, string $fecha_caducidad='', string $imagen='', string $usuario='')
+    public function __construct(string $nombre='', float $precio=0, string $fecha_caducidad='', string $imagen='', int $usuario=0)
     {
         $this->id = null;
         $this->nombre = $nombre;
@@ -133,23 +133,27 @@ class Articulo implements IEntity
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getUsuario(): string
+    public function getUsuario(): int
     {
         return $this->usuario;
     }
 
     /**
-     * @param string $usuario
+     * @param int $usuario
      * @return Articulo
      */
-    public function setUsuario(string $usuario): Articulo
+    public function setUsuario(int $usuario): Articulo
     {
         $this->usuario = $usuario;
         return $this;
     }
 
+
+    /**
+     * @return string
+     */
     public function getUrlImagen() : string
     {
         return self::RUTA_FOTOS_ARTICULOS . $this->getImagen();
