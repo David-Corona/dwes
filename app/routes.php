@@ -4,6 +4,10 @@ $router->get('', 'PagesController@index');
 $router->get('checkout', 'PagesController@checkout');
 $router->get('perfil', 'PagesController@perfil', 'ROLE_USER');
 $router->post('perfil/cambioPass', 'PagesController@cambioPass', 'ROLE_USER');
+$router->get('usuarios', 'PagesController@usuarios', 'ROLE_ADMIN');
+$router->get('usuarios/:id', 'PagesController@admin', 'ROLE_ADMIN');
+$router->post('usuarios/editar/:id', 'PagesController@editar', 'ROLE_ADMIN');
+$router->post('usuarios/eliminar/:id', 'PagesController@eliminar', 'ROLE_ADMIN');
 
 $router->get('productos', 'ProductoController@index', 'ROLE_USER');
 $router->post('productos/nuevo', 'ProductoController@nuevo', 'ROLE_ADMIN');

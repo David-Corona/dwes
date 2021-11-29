@@ -34,13 +34,15 @@
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('perfil') ? 'current' : '' ?>" >
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('perfil') ? '/perfil' : '/perfil' ?>">Perfil</a>
                             </li>
+                                <?php if ($app['user']->getRole() === "ROLE_ADMIN") : ?>
+                                    <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('usuarios') ? 'current' : '' ?>" >
+                                        <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('usuarios') ? '/usuarios' : '/usuarios' ?>">Usuarios</a>
+                                    </li>
+                                <?php endif; ?>
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('logout') ? 'current' : '' ?>">
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('logout') ? '#' : '/logout' ?>">Logout (<?= $app['user']->getUsername() ?>)</a>
                             </li>
                             <?php endif; ?>
-                            <!--<li class="<   ?= cursophp7dc\app\utils\Utils::opcionMenuActivaEnArray(['shop', 'single']) ? 'current' : '' ?>" >
-                                <a href="<   ?= cursophp7dc\app\utils\Utils::opcionMenuActiva('shop') ? '#' : '/shop' ?>">Shop</a>
-                            </li>-->
 
                             <div class="clear"></div>
                         </ul>

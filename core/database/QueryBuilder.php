@@ -152,6 +152,27 @@ abstract class QueryBuilder
     }
 
     /**
+     * @param IEntity $entity
+     * @throws QueryException
+     */
+    public function delete(IEntity $entity):void
+    {
+        try
+        {
+            $parameters = $entity->toArray();
+            $sql = 'DELETE FROM ' . $this->table . ' WHERE id=' . $parameters['id'];
+            $statement = $this->connection->prepare($sql);
+            $statement->execute();
+        }
+        catch (PDOException $pdoException)
+        {
+            throw new QueryException('Error al eliminar el elemento con id ' . $parameters['id']);
+        }
+    }
+
+
+
+    /**
      * @param array $parameters
      * @return string
      */
@@ -170,6 +191,10 @@ abstract class QueryBuilder
         return $updates;
     }
 
+    /**
+     * @param IEntity $entity
+     * @throws QueryException
+     */
     public function update(IEntity $entity):void
     {
         try

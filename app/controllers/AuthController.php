@@ -108,6 +108,7 @@ class AuthController
             $usuario->setUsername($_POST['username']);
             $usuario->setRole('ROLE_USER');
             $usuario->setPassword($password);
+            $usuario->setNumArticulos(0);
 
             App::getRepository(UsuarioRepository::class)->save($usuario);
 

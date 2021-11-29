@@ -2,6 +2,7 @@
 namespace cursophp7dc\app\controllers;
 
 use cursophp7dc\app\exceptions\AppException;
+use cursophp7dc\app\exceptions\NotFoundException;
 use cursophp7dc\app\exceptions\QueryException;
 use cursophp7dc\app\exceptions\ValidationException;
 use cursophp7dc\app\repository\ProductoRepository;
@@ -81,5 +82,89 @@ class PagesController
         }
     }
 
+    /**
+     * @throws AppException
+     * @throws QueryException
+     */
+    public function usuarios()
+    {
+        $usuarios = App::getRepository(UsuarioRepository::class)->findAll();
+
+        Response::renderView('usuarios', 'layout', compact('usuarios'));
+    }
+
+    /**
+     * @param int $id
+     * @throws AppException
+     * @throws QueryException
+     * @throws NotFoundException
+     */
+    public function admin(int $id)
+    {
+        $usuario = App::getRepository(UsuarioRepository::class)->find($id);
+        $errores = FlashMessage::get('usuario-error', []);
+        $mensaje = FlashMessage::get('usuario-mensaje');
+
+        Response::renderView('admin-usuario', 'layout', compact('usuario', 'errores', 'mensaje'));
+    }
+
+    /**
+     * @param int $id
+     * @throws AppException
+     * @throws NotFoundException
+     * @throws QueryException
+     */
+    public function editar(int $id)
+    {
+        try{
+            $rol = $_POST['rol'];
+
+            $usuario = App::getRepository(UsuarioRepository::class)->find($id);
+            $usuario->setRole($rol);
+            App::getRepository(UsuarioRepository::class)->update($usuario);
+
+            //Log
+            $message = "Se ha modificado el rol de " . $usuario->getUsername() .".";
+            App::get('logger')->add($message);
+
+            FlashMessage::set('usuario-mensaje', $message);
+
+            App::get('router')->redirect('usuarios/' . $usuario->getID());
+        }
+        catch (ValidationException $validationException)
+        {
+            FlashMessage::set('usuario-error', [ $validationException->getMessage() ]);
+            App::get('router')->redirect('usuarios/' . $usuario->getID());
+        }
+    }
+
+    /**
+     * @param int $id
+     * @throws AppException
+     * @throws NotFoundException
+     * @throws QueryException
+     */
+    public function eliminar(int $id)
+    {
+        try {
+            $usuario = App::getRepository(UsuarioRepository::class)->find($id);
+
+            App::getRepository(UsuarioRepository::class)->delete($usuario);
+
+            //Log
+            $message = "Se ha eliminado el usuario " . $usuario->getUsername() . ".";
+            App::get('logger')->add($message);
+
+            App::get('router')->redirect('usuarios');
+            FlashMessage::set('usuario-mensaje', $message);
+        }
+        catch (ValidationException $validationException)
+        {
+            FlashMessage::set('usuario-error', [ $validationException->getMessage() ]);
+            App::get('router')->redirect('usuarios/' . $usuario->getID());
+        }
+
+
+    }
 
 }
