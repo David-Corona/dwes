@@ -2,10 +2,9 @@
 <div id="usuarios">
     <div class="container">
         <div class="col-xs-12 col-sm-8 col-sm-push-2">
+            <br>
             <h1>Usuarios</h1>
             <hr>
-
-            <?php include __DIR__ . '/partials/show-error.part.php' ?>
 
             <div class="clear">
                 <table class="table">

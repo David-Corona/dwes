@@ -3,7 +3,7 @@
 <div class="main">
     <div class="container">
         <div class="row">
-
+            <br>
             <h1>Mi perfil</h1>
             <hr>
 
@@ -27,8 +27,8 @@
                 <div class="form-group">
                     <div class="col-xs-12">
                         <label class="label-control">Repetir Contraseña:</label>
-                        <input class="form-control" type="password" name="re-password">
-                        <button class="pull-right btn btn-lg sr-button">ENVIAR</button>
+                        <input class="form-control" type="password" name="re-password"><br>
+                        <button class="pull-left btn btn-lg sr-button">ENVIAR</button>
                     </div>
                 </div>
             </form>

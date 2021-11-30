@@ -2,7 +2,7 @@
 <div class="main">
     <div class="container">
         <div class="row">
-
+            <br>
             <h1>Detalles Usuario</h1>
             <hr>
             <div class="clear">
@@ -37,7 +37,7 @@
                         <button class="btn btn-lg sr-button">Eliminar</button></p>
                 </div>
             </form>
-
+            <br>
 
         </div>
     </div>

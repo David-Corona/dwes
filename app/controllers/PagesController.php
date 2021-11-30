@@ -156,7 +156,6 @@ class PagesController
             App::get('logger')->add($message);
 
             App::get('router')->redirect('usuarios');
-            FlashMessage::set('usuario-mensaje', $message);
         }
         catch (ValidationException $validationException)
         {

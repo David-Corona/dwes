@@ -36,7 +36,10 @@ class Producto implements IEntity
      * @var int
      */
     private $categoria;
-
+    /**
+     * @var int
+     */
+    private $usuario;
 
     /**
      * @param string $titulo
@@ -47,7 +50,7 @@ class Producto implements IEntity
      * @param string $nombreImagen
      */
     public function __construct(string $titulo='', string $subtitulo='', string $descripcion='',
-                                int $categoria=0, float $precio=0, string $nombreImagen='default.png')
+                                int $categoria=0, float $precio=0, string $nombreImagen='default.png', int $usuario=0)
     {
         $this->id = null;
         $this->titulo = $titulo;
@@ -56,6 +59,7 @@ class Producto implements IEntity
         $this->precio = $precio;
         $this->nombreImagen = $nombreImagen;
         $this->categoria = $categoria;
+        $this->usuario = $usuario;
     }
 
     /**
@@ -180,11 +184,35 @@ class Producto implements IEntity
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getUsuario(): int
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param int $usuario
+     * @return Producto
+     */
+    public function setUsuario(int $usuario): Producto
+    {
+        $this->usuario = $usuario;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getUrlImagen() : string
     {
         return self::RUTA_IMAGENES_PRODUCTO . $this->getNombreImagen();
     }
 
+    /**
+     * @return string
+     */
     public function getUrlImagenMini() : string
     {
         return self::RUTA_IMAGENES_SHOP . $this->getNombreImagen();
@@ -202,7 +230,8 @@ class Producto implements IEntity
             'descripcion' => $this->getDescripcion(),
             'categoria' => $this->getCategoria(),
             'precio' => $this->getPrecio(),
-            'nombreImagen' => $this->getNombreImagen()
+            'nombreImagen' => $this->getNombreImagen(),
+            'usuario' => $this->getUsuario()
         ];
     }
 }

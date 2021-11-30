@@ -18,6 +18,7 @@ use cursophp7dc\core\Response;
 class ProductoController
 {
     /**
+     * @throws AppException
      * @throws QueryException
      */
     public function index()
@@ -67,7 +68,7 @@ class ProductoController
             $imagen->saveUploadFile(Producto::RUTA_IMAGENES_PRODUCTO);
             //$imagen->copyFile(Producto::RUTA_IMAGENES_SHOP, Producto::RUTA_IMAGENES_PRODUCTO);
 
-            $productoTienda = new Producto($titulo, $subtitulo, $descripcion, $categoria, $precio, $imagen->getFileName());
+            $productoTienda = new Producto($titulo, $subtitulo, $descripcion, $categoria, $precio, $imagen->getFileName(), App::get('appUser')->getId());
 
             $imagen->resizeFile(Producto::RUTA_IMAGENES_PRODUCTO, Producto::RUTA_IMAGENES_SHOP);
 
@@ -89,7 +90,6 @@ class ProductoController
             FlashMessage::unset('categoriaSeleccionada');
             FlashMessage::unset('precio');
 
-
         }
         catch (FileException $fileException)
         {
@@ -105,13 +105,122 @@ class ProductoController
 
     /**
      * @param int $id
+     * @throws AppException
      * @throws NotFoundException
      * @throws QueryException
      */
     public function show(int $id)
     {
-        $producto = App::getRepository(ProductoRepository::class)->find($id);
+        //$producto = App::getRepository(ProductoRepository::class)->find($id);
+        $prodRepository = App::getRepository(ProductoRepository::class);
+        $producto = $prodRepository->find($id);
 
-        Response::renderView('show-producto', 'layout', compact('producto'));
+        Response::renderView('show-producto', 'layout', compact('producto', 'prodRepository'));
     }
+
+    /**
+     * @param int $id
+     * @throws AppException
+     * @throws NotFoundException
+     * @throws QueryException
+     */
+    public function admin(int $id)
+    {
+        $prodRepository = App::getRepository(ProductoRepository::class);
+        $producto = $prodRepository->find($id);
+        $categorias = App::getRepository(CategoriaRepository::class)->findAll();
+
+        $errores = FlashMessage::get('errores', []);
+        $mensaje = FlashMessage::get('mensaje');
+        $titulo = FlashMessage::get('titulo');
+        $subtitulo = FlashMessage::get('subtitulo');
+        $descripcion = FlashMessage::get('descripcion');
+        $categoriaSeleccionada = FlashMessage::get('categoriaSeleccionada');
+        $precio = FlashMessage::get('precio');
+
+        Response::renderView('admin-producto', 'layout',
+            compact('producto', 'categorias', 'prodRepository', 'errores', 'mensaje', 'titulo',
+                'subtitulo', 'descripcion', 'categoriaSeleccionada', 'precio'));
+
+    }
+
+
+    /**
+     * @param int $id
+     * @throws AppException
+     * @throws NotFoundException
+     * @throws QueryException
+     */
+    public function editar(int $id)
+    {
+        try{
+
+            $titulo = trim(htmlspecialchars($_POST['titulo']));
+            FlashMessage::set('titulo', $titulo);
+            $subtitulo = trim(htmlspecialchars($_POST['subtitulo']));
+            FlashMessage::set('subtitulo', $subtitulo);
+            $descripcion = trim(htmlspecialchars($_POST['descripcion']));
+            FlashMessage::set('descripcion', $descripcion);
+            $categoria = (int)$_POST['categoria'];
+            FlashMessage::set('categoriaSeleccionada', $categoria);
+            $precio = (float)$_POST['precio'];
+            FlashMessage::set('precio', $precio);
+
+
+            $producto = App::getRepository(ProductoRepository::class)->find($id);
+            $producto->setTitulo($titulo);
+            $producto->setSubtitulo($subtitulo);
+            $producto->setDescripcion($descripcion);
+            $producto->setCategoria($categoria);
+            $producto->setPrecio($precio);
+
+            App::getRepository(ProductoRepository::class)->update($producto);
+
+            //Log
+            $message = "Se ha modificado el producto " . $producto->getTitulo() .".";
+            App::get('logger')->add($message);
+
+            FlashMessage::set('mensaje', $message);
+
+            App::get('router')->redirect('admin-producto/' . $producto->getID());
+        }
+        catch (ValidationException $validationException)
+        {
+            FlashMessage::set('errores', [ $validationException->getMessage() ]);
+            App::get('router')->redirect('admin-producto/' . $producto->getID());
+        }
+
+
+    }
+
+    /**
+     * @param int $id
+     * @throws AppException
+     * @throws NotFoundException
+     * @throws QueryException
+     */
+    public function eliminar(int $id)
+    {
+        try {
+            $producto = App::getRepository(ProductoRepository::class)->find($id);
+
+            App::getRepository(ProductoRepository::class)->delete($producto);
+
+            //Log
+            $message = "Se ha eliminado el producto " . $producto->getTitulo() . ".";
+            App::get('logger')->add($message);
+
+            App::get('router')->redirect('productos');
+        }
+        catch (ValidationException $validationException)
+        {
+            FlashMessage::set('errores', [ $validationException->getMessage() ]);
+            App::get('router')->redirect('admin-producto/' . $producto->getID());
+        }
+
+
+
+    }
+
+
 }

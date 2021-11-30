@@ -41,10 +41,6 @@
 
                                 <button class="">ENVIAR</button>
 
-                                <!--<div class="form-submit">
-                                    <input name="submit" type="submit" id="submit" value="Submit"><br>
-                                </div>-->
-
                             </div>
                             <div class="clear">Los campos marcados con (*) son obligatorios.</div>
                         </form>
@@ -61,6 +57,8 @@
                                 <th scope="col">Descripcion</th>
                                 <th scope="col">Categoría</th>
                                 <th scope="col">Precio</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Administrar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -77,6 +75,8 @@
                                     <td><?= $producto->getDescripcion() ?></td>
                                     <td><?= $prodRepository->getCategoria($producto)->getNombre() ?></td>
                                     <td><?= $producto->getPrecio() ?></td>
+                                    <td><?= $prodRepository->getUsuario($producto)->getUsername() ?></td>
+                                    <td><a href="/admin-producto/<?= $producto->getId()?>">Admin</a></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

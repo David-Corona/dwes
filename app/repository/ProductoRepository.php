@@ -3,6 +3,7 @@ namespace cursophp7dc\app\repository;
 
 use cursophp7dc\app\entity\Categoria;
 use cursophp7dc\app\entity\Producto;
+use cursophp7dc\app\entity\Usuario;
 use cursophp7dc\app\exceptions\AppException;
 use cursophp7dc\app\exceptions\NotFoundException;
 use cursophp7dc\app\exceptions\QueryException;
@@ -30,6 +31,18 @@ class ProductoRepository extends QueryBuilder
     {
         $categoriaRepository = new CategoriaRepository();
         return $categoriaRepository->find($producto->getCategoria());
+    }
+
+    /**
+     * @param Producto $producto
+     * @return Usuario
+     * @throws NotFoundException
+     * @throws QueryException
+     */
+    public function getUsuario(Producto $producto) : Usuario
+    {
+        $usuarioRepository = new UsuarioRepository();
+        return $usuarioRepository->find($producto->getUsuario());
     }
 
     //incrementar número de producto en categoría y guardar producto

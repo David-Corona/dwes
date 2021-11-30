@@ -10,7 +10,10 @@ $router->post('usuarios/editar/:id', 'PagesController@editar', 'ROLE_ADMIN');
 $router->post('usuarios/eliminar/:id', 'PagesController@eliminar', 'ROLE_ADMIN');
 
 $router->get('productos', 'ProductoController@index', 'ROLE_USER');
-$router->post('productos/nuevo', 'ProductoController@nuevo', 'ROLE_ADMIN');
+$router->post('productos/nuevo', 'ProductoController@nuevo', 'ROLE_USER');
+$router->get('admin-producto/:id', 'ProductoController@admin', 'ROLE_USER');
+$router->post('admin-producto/editar/:id', 'ProductoController@editar', 'ROLE_USER');
+$router->post('admin-producto/eliminar/:id', 'ProductoController@eliminar', 'ROLE_USER');
 $router->get('productos/:id', 'ProductoController@show');
 
 $router->get('contact', 'MensajeController@index');
