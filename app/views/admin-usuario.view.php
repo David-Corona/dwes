@@ -5,17 +5,21 @@
             <br>
             <h1>Detalles Usuario</h1>
             <hr>
+            <?php include __DIR__ . '/partials/show-error.part.php' ?>
             <div class="clear">
                 <p>Nombre de usuario: <?= $usuario->getUsername() ?></p>
                 <p>Tipo de usuario: <?= $usuario->getRole() ?></p>
                 <p>Número de artículos publicados: <?= $usuario->getNumArticulos() ?></p>
+            </div>
+            <div class="clear">
+                <p><a href="/productos/<?= $usuario->getId()?>">Sus Productos</a></p>
+                <p><a href="/compras/<?= $usuario->getId()?>">Sus Compras</a></p>
             </div>
             <br>
             <br>
 
             <h1>Editar Usuario</h1>
             <hr>
-            <?php include __DIR__ . '/partials/show-error.part.php' ?>
 
             <form method="post" action="/usuarios/editar/<?= $usuario->getId()?>" enctype="multipart/form-data">
                 <div class="">

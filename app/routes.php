@@ -4,17 +4,19 @@ $router->get('', 'PagesController@index');
 $router->get('checkout', 'PagesController@checkout');
 $router->get('perfil', 'PagesController@perfil', 'ROLE_USER');
 $router->post('perfil/cambioPass', 'PagesController@cambioPass', 'ROLE_USER');
+$router->get('compras/:id', 'PagesController@compras', 'ROLE_USER');
 $router->get('usuarios', 'PagesController@usuarios', 'ROLE_ADMIN');
 $router->get('usuarios/:id', 'PagesController@admin', 'ROLE_ADMIN');
 $router->post('usuarios/editar/:id', 'PagesController@editar', 'ROLE_ADMIN');
 $router->post('usuarios/eliminar/:id', 'PagesController@eliminar', 'ROLE_ADMIN');
 
-$router->get('productos', 'ProductoController@index', 'ROLE_USER');
+$router->get('productos/:id', 'ProductoController@index', 'ROLE_USER');
 $router->post('productos/nuevo', 'ProductoController@nuevo', 'ROLE_USER');
 $router->get('admin-producto/:id', 'ProductoController@admin', 'ROLE_USER');
 $router->post('admin-producto/editar/:id', 'ProductoController@editar', 'ROLE_USER');
 $router->post('admin-producto/eliminar/:id', 'ProductoController@eliminar', 'ROLE_USER');
-$router->get('productos/:id', 'ProductoController@show');
+$router->get('producto/:id', 'ProductoController@show');
+$router->post('comprar/:id', 'ProductoController@comprar', 'ROLE_USER');
 
 $router->get('contact', 'MensajeController@index');
 $router->post('mensaje', 'MensajeController@mensaje');

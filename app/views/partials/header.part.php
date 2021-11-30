@@ -13,10 +13,6 @@
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('index') ? 'current' : '' ?>" >
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('index') ? '#' : '/' ?>">Inicio</a>
                             </li>
-                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? 'current' : '' ?>">
-                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? '#' : '/contact' ?>">Contacto</a>
-                            </li>
-
                             <?php if (is_null($app['user'])) : ?>
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('login') ? 'current' : '' ?>">
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('login') ? '#' : '/login' ?>">Login</a>
@@ -25,9 +21,9 @@
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('registro') ? '#' : '/registro' ?>">Registro</a>
                             </li>
                             <?php else: ?>
-                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? 'current' : '' ?>" >
+                            <!--<li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? 'current' : '' ?>" >
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('productos') ? '/productos' : '/productos' ?>">Productos</a>
-                            </li>
+                            </li>-->
                             <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('articulos') ? 'current' : '' ?>" >
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('articulos') ? '/articulos' : '/articulos' ?>">Artículos</a>
                             </li>
@@ -43,6 +39,9 @@
                                 <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('logout') ? '#' : '/logout' ?>">Logout (<?= $app['user']->getUsername() ?>)</a>
                             </li>
                             <?php endif; ?>
+                            <li class="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? 'current' : '' ?>">
+                                <a href="<?= cursophp7dc\app\utils\Utils::opcionMenuActiva('contact') ? '#' : '/contact' ?>">Contacto</a>
+                            </li>
 
                             <div class="clear"></div>
                         </ul>

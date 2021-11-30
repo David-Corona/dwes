@@ -5,12 +5,14 @@ use cursophp7dc\app\exceptions\AppException;
 use cursophp7dc\app\exceptions\NotFoundException;
 use cursophp7dc\app\exceptions\QueryException;
 use cursophp7dc\app\exceptions\ValidationException;
+use cursophp7dc\app\repository\CompraRepository;
 use cursophp7dc\app\repository\ProductoRepository;
 use cursophp7dc\app\repository\UsuarioRepository;
 use cursophp7dc\core\App;
 use cursophp7dc\core\helpers\FlashMessage;
 use cursophp7dc\core\Response;
 use cursophp7dc\core\Security;
+use Exception;
 
 class PagesController
 {
@@ -157,12 +159,31 @@ class PagesController
 
             App::get('router')->redirect('usuarios');
         }
-        catch (ValidationException $validationException)
+        catch (Exception $exception)
         {
-            FlashMessage::set('usuario-error', [ $validationException->getMessage() ]);
+            FlashMessage::set('usuario-error', [ $exception->getMessage() ]);
             App::get('router')->redirect('usuarios/' . $usuario->getID());
         }
 
+    }
+
+    /**
+     * @param int $id
+     * @throws AppException
+     * @throws QueryException
+     */
+    public function compras(int $id)
+    {
+
+        $compraRepository = App::getRepository(CompraRepository::class);
+        //if (App::get('appUser')->getRole() === "ROLE_ADMIN"){
+            //$compras = $compraRepository->findAll();
+        //} else {
+            $compras = $compraRepository->findComprasUsuario($id);
+        //}
+
+        Response::renderView('compras', 'layout',
+            compact('compras', 'compraRepository'));
 
     }
 

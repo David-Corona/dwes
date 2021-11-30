@@ -66,8 +66,8 @@
                                 <tr>
                                     <th scope="row"><?= $producto->getId() ?></th>
                                     <td>
-                                        <img src="<?= $producto->getUrlImagenMini() ?>"
-                                             alt="<?= $producto->getUrlImagenMini() ?>"
+                                        <img src="/<?= $producto->getUrlImagenMini() ?>"
+                                             alt="/<?= $producto->getNombreImagen() ?>"
                                              title="<?= $producto->getTitulo() ?>"
                                     </td>
                                     <td><?= $producto->getTitulo() ?></td>

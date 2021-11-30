@@ -114,6 +114,12 @@ abstract class QueryBuilder
         return $this->executeQuery($sql);
     }
 
+    public function findComprasUsuario(int $idUser) : array
+    {
+        $sql = "SELECT * from $this->table WHERE id_usuario=$idUser";
+        return $this->executeQuery($sql);
+    }
+
     //devuelve uno de los objetos que cumpla los filtros
     public function findOneBy(array $filters):?IEntity
     {

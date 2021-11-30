@@ -12,6 +12,11 @@
                 <p>Tipo de usuario: <?= $usuario->getRole() ?></p>
                 <p>Número de artículos publicados: <?= $usuario->getNumArticulos() ?></p>
             </div>
+
+            <div class="clear">
+                <p><a href="/productos/<?= $usuario->getId()?>">Mis Productos</a></p>
+                <p><a href="/compras/<?= $usuario->getId()?>">Mis Compras</a></p>
+            </div>
             <hr>
             <h2>Cambiar contraseña:</h2>
 

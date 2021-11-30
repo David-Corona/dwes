@@ -2,18 +2,22 @@
 
 namespace cursophp7dc\app\controllers;
 
+use cursophp7dc\app\entity\Compra;
 use cursophp7dc\app\entity\Producto;
 use cursophp7dc\app\exceptions\AppException;
 use cursophp7dc\app\exceptions\FileException;
 use cursophp7dc\app\exceptions\NotFoundException;
 use cursophp7dc\app\exceptions\QueryException;
 use cursophp7dc\app\exceptions\ValidationException;
+use cursophp7dc\app\repository\ArticuloRepository;
 use cursophp7dc\app\repository\CategoriaRepository;
+use cursophp7dc\app\repository\CompraRepository;
 use cursophp7dc\app\repository\ProductoRepository;
 use cursophp7dc\app\utils\File;
 use cursophp7dc\core\App;
 use cursophp7dc\core\helpers\FlashMessage;
 use cursophp7dc\core\Response;
+use Exception;
 
 class ProductoController
 {
@@ -21,10 +25,15 @@ class ProductoController
      * @throws AppException
      * @throws QueryException
      */
-    public function index()
+    public function index(int $id)
     {
         $prodRepository = App::getRepository(ProductoRepository::class);
-        $productos = $prodRepository->findAll();
+        /*if (App::get('appUser')->getRole() === "ROLE_ADMIN"){
+            $productos = $prodRepository->findAll();
+        } else {*/
+            $productos = $prodRepository->findAllUser($id);
+        //}
+
         $categorias = App::getRepository(CategoriaRepository::class)->findAll();
 
         $errores = FlashMessage::get('errores', []);
@@ -100,7 +109,7 @@ class ProductoController
             FlashMessage::set('errores', [ $validationException->getMessage() ]);
         }
 
-        App::get('router')->redirect('productos');
+        App::get('router')->redirect('productos/' . App::get('appUser')->getId());
     }
 
     /**
@@ -126,21 +135,34 @@ class ProductoController
      */
     public function admin(int $id)
     {
-        $prodRepository = App::getRepository(ProductoRepository::class);
-        $producto = $prodRepository->find($id);
-        $categorias = App::getRepository(CategoriaRepository::class)->findAll();
+        try {
 
-        $errores = FlashMessage::get('errores', []);
-        $mensaje = FlashMessage::get('mensaje');
-        $titulo = FlashMessage::get('titulo');
-        $subtitulo = FlashMessage::get('subtitulo');
-        $descripcion = FlashMessage::get('descripcion');
-        $categoriaSeleccionada = FlashMessage::get('categoriaSeleccionada');
-        $precio = FlashMessage::get('precio');
+            $prodRepository = App::getRepository(ProductoRepository::class);
+            $producto = $prodRepository->find($id);
 
-        Response::renderView('admin-producto', 'layout',
-            compact('producto', 'categorias', 'prodRepository', 'errores', 'mensaje', 'titulo',
-                'subtitulo', 'descripcion', 'categoriaSeleccionada', 'precio'));
+            if (App::get('appUser')->getId() == $producto->getUsuario() || App::get('appUser')->getRole() === "ROLE_ADMIN") {
+                $categorias = App::getRepository(CategoriaRepository::class)->findAll();
+
+                $errores = FlashMessage::get('errores', []);
+                $mensaje = FlashMessage::get('mensaje');
+                $titulo = FlashMessage::get('titulo');
+                $subtitulo = FlashMessage::get('subtitulo');
+                $descripcion = FlashMessage::get('descripcion');
+                $categoriaSeleccionada = FlashMessage::get('categoriaSeleccionada');
+                $precio = FlashMessage::get('precio');
+
+                Response::renderView('admin-producto', 'layout',
+                    compact('producto', 'categorias', 'prodRepository', 'errores', 'mensaje', 'titulo',
+                        'subtitulo', 'descripcion', 'categoriaSeleccionada', 'precio'));
+            } else {
+                App::get('router')->redirect('productos/' . $id);
+            }
+        }
+        catch (Exception $exception)
+        {
+            FlashMessage::set('errores', [ $exception->getMessage() ]);
+            App::get('router')->redirect('admin-producto/' . $producto->getID());
+        }
 
     }
 
@@ -210,16 +232,35 @@ class ProductoController
             $message = "Se ha eliminado el producto " . $producto->getTitulo() . ".";
             App::get('logger')->add($message);
 
-            App::get('router')->redirect('productos');
+            App::get('router')->redirect('productos/' .  App::get('appUser')->getId());
         }
-        catch (ValidationException $validationException)
+        catch (Exception $exception)
         {
-            FlashMessage::set('errores', [ $validationException->getMessage() ]);
+            FlashMessage::set('errores', [ $exception->getMessage() ]);
             App::get('router')->redirect('admin-producto/' . $producto->getID());
         }
+    }
 
+    /**
+     * @param int $id
+     * @throws AppException
+     * @throws NotFoundException
+     * @throws QueryException
+     */
+    public function comprar(int $id)
+    {
+        $producto = App::getRepository(ProductoRepository::class)->find($id);
 
+        $compra = new Compra(App::get('appUser')->getId(), $producto->getId());
 
+        $compraRepository = App::getRepository(CompraRepository::class);
+
+        $compraRepository->save($compra);
+
+        $message = "El usuario " . App::get('appUser')->getUsername() . " ha realizado la compra del producto: " . $producto->getTitulo();
+        App::get('logger')->add($message);
+
+        App::get('router')->redirect('compras/' . App::get('appUser')->getId());
     }
 
 
